@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>汇编学习 | 枳ukiyoe&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我汇编用的软件是goASM
+如果写了一个汇编代码的文件filename.asm编译：goasm /x64 filename.asm链接：golink filename.obj user32.dll
+在dosBox中使用debug，(我把debug.exe文件放在了D:/目录下)首先要挂在d盘,然后使用debug打开dosBox：
+12mount d d:/debug
+就进入了debug模式
+inc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编学习">
+<meta property="og:url" content="gensokyoukiyoe.github.io/2017/10/11/汇编学习/index.html">
+<meta property="og:site_name" content="枳ukiyoe's">
+<meta property="og:description" content="我汇编用的软件是goASM
+如果写了一个汇编代码的文件filename.asm编译：goasm /x64 filename.asm链接：golink filename.obj user32.dll
+在dosBox中使用debug，(我把debug.exe文件放在了D:/目录下)首先要挂在d盘,然后使用debug打开dosBox：
+12mount d d:/debug
+就进入了debug模式
+inc">
+<meta property="og:updated_time" content="2017-10-11T09:28:56.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编学习">
+<meta name="twitter:description" content="我汇编用的软件是goASM
+如果写了一个汇编代码的文件filename.asm编译：goasm /x64 filename.asm链接：golink filename.obj user32.dll
+在dosBox中使用debug，(我把debug.exe文件放在了D:/目录下)首先要挂在d盘,然后使用debug打开dosBox：
+12mount d d:/debug
+就进入了debug模式
+inc">
+  
+    <link rel="alternate" href="/atom.xml" title="枳ukiyoe&#39;s" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <!--<link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">枳ukiyoe&#39;s</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="gensokyoukiyoe.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-汇编学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/11/汇编学习/" class="article-date">
+  <time datetime="2017-10-11T01:33:05.000Z" itemprop="datePublished">2017-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      汇编学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>我</strong>汇编用的软件是goASM</p>
+<p>如果写了一个汇编代码的文件filename.asm<br>编译：<br>goasm /x64 filename.asm<br>链接：<br>golink filename.obj user32.dll</p>
+<p><strong>在</strong>dosBox中使用debug，(我把debug.exe文件放在了D:/目录下)<br>首先要挂在d盘,然后使用debug<br>打开dosBox：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount d d:/</div><div class="line">debug</div></pre></td></tr></table></figure>
+<p>就进入了debug模式</p>
+<p>inc 目标操作数+1</p>
+<p>mov AX,[BX]  是把该地址的数据传给AX<br>mov AX, BX   则是将内存地址传给AX<br>两者是不同的。</p>
+<p>ax 寄存器地址<br>bx 偏移地址<br>通常loop实现循环功能，cx中存放循环次数</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/11/汇编学习/" data-id="cj9cwm2pm00220ww9o8xrzyx8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/11/人间词话-学习笔记-三种境界/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          人间词话-学习笔记-三个境界
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/10/总结-10-09-10-15/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">总结_10/09-10/15</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OS/">OS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hobby/">hobby</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uml/">uml</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hobby/">hobby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/literature/">literature</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plans/">plans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uml/">uml</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/OS/" style="font-size: 20px;">OS</a> <a href="/tags/hobby/" style="font-size: 10px;">hobby</a> <a href="/tags/literature/" style="font-size: 16.67px;">literature</a> <a href="/tags/notes/" style="font-size: 10px;">notes</a> <a href="/tags/plans/" style="font-size: 13.33px;">plans</a> <a href="/tags/uml/" style="font-size: 10px;">uml</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/26/操作系统-学习笔记-二级机会法/">操作系统-学习笔记-二级机会法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/26/电子烟/">电子烟</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/操作系统-学习笔记-时钟页面置换算法/">操作系统-学习笔记-时钟页面置换算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/操作系统-学习笔记-最近最久未使用算法/">操作系统-学习笔记-最近最久未使用算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 枳ukiyoe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>操作系统-学习笔记-计算机体系结构及内存分层体系 | 枳ukiyoe&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="计算机体系结构/内存分层结构
+地址空间 &amp;amp; 地址生成
+连续地址分配
+计算机体系结构/内存分层结构计算机体系结构内存分层结构在操作系统的内存管理范例
+CPU处理速度寄存器&amp;gt; L1缓存&amp;gt; L2缓存 &amp;gt; 主存 &amp;gt; 磁盘(虚拟内存)
+内存 Memory 由二部分组成第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-学习笔记-计算机体系结构及内存分层体系">
+<meta property="og:url" content="gensokyoukiyoe.github.io/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/index.html">
+<meta property="og:site_name" content="枳ukiyoe's">
+<meta property="og:description" content="计算机体系结构/内存分层结构
+地址空间 &amp;amp; 地址生成
+连续地址分配
+计算机体系结构/内存分层结构计算机体系结构内存分层结构在操作系统的内存管理范例
+CPU处理速度寄存器&amp;gt; L1缓存&amp;gt; L2缓存 &amp;gt; 主存 &amp;gt; 磁盘(虚拟内存)
+内存 Memory 由二部分组成第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要">
+<meta property="og:image" content="https://pic3.zhimg.com/50/57accc32a92e037d96e9aa9211f9438a_hd.png">
+<meta property="og:updated_time" content="2017-10-19T14:41:38.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统-学习笔记-计算机体系结构及内存分层体系">
+<meta name="twitter:description" content="计算机体系结构/内存分层结构
+地址空间 &amp;amp; 地址生成
+连续地址分配
+计算机体系结构/内存分层结构计算机体系结构内存分层结构在操作系统的内存管理范例
+CPU处理速度寄存器&amp;gt; L1缓存&amp;gt; L2缓存 &amp;gt; 主存 &amp;gt; 磁盘(虚拟内存)
+内存 Memory 由二部分组成第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要">
+<meta name="twitter:image" content="https://pic3.zhimg.com/50/57accc32a92e037d96e9aa9211f9438a_hd.png">
+  
+    <link rel="alternate" href="/atom.xml" title="枳ukiyoe&#39;s" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <!--<link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">枳ukiyoe&#39;s</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="gensokyoukiyoe.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-操作系统-学习笔记-计算机体系结构及内存分层体系" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/" class="article-date">
+  <time datetime="2017-10-19T05:04:33.000Z" itemprop="datePublished">2017-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      操作系统-学习笔记-计算机体系结构及内存分层体系
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>计算机体系结构/内存分层结构</p>
+<p>地址空间 &amp; 地址生成</p>
+<p>连续地址分配</p>
+<h4 id="计算机体系结构-内存分层结构"><a href="#计算机体系结构-内存分层结构" class="headerlink" title="计算机体系结构/内存分层结构"></a>计算机体系结构/内存分层结构</h4><p>计算机体系结构<br>内存分层结构<br>在操作系统的内存管理范例</p>
+<h4 id="CPU处理速度"><a href="#CPU处理速度" class="headerlink" title="CPU处理速度"></a>CPU处理速度</h4><p>寄存器&gt; L1缓存&gt; L2缓存 &gt; 主存 &gt; 磁盘(虚拟内存)</p>
+<blockquote><p>内存 Memory 由二部分组成<br>第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要存放数据和程序的地方，所以也叫做“主存”，也就是我们平常说的，内存条，一旦断电数据就丢失了;</p><br><p>第二部分：Read-Only Memory（ROM），只读存储器，对于用户来说，它只能读取数据，不能写入信息，断电也没有关系，放ROM的数据一辈子都不会变，旧式电脑的BIOS放在ROM上</p><br><p><img src="https://pic3.zhimg.com/50/57accc32a92e037d96e9aa9211f9438a_hd.png" alt="存储器结构图"></p><footer><strong>DADAman</strong><cite><a href="https://www.zhihu.com/question/28445273" target="_blank" rel="external">电脑的主存储器和主存、内存的关系是什么？</a></cite></footer></blockquote>
+<h4 id="操作系统要完成的目标："><a href="#操作系统要完成的目标：" class="headerlink" title="操作系统要完成的目标："></a>操作系统要完成的目标：</h4><p>抽象：逻辑地址空间<br>保护：独立地址空间<br>共享：访问相同内存<br>虚拟化：更多的地址空间</p>
+<h4 id="操作系统管理内存的不同方法："><a href="#操作系统管理内存的不同方法：" class="headerlink" title="操作系统管理内存的不同方法："></a>操作系统管理内存的不同方法：</h4><p>程序重定位<br>分段<br>分页<br>虚拟内存<br>按需分页虚拟内存</p>
+<h4 id="实现高度依赖硬件"><a href="#实现高度依赖硬件" class="headerlink" title="实现高度依赖硬件"></a>实现高度依赖硬件</h4><p>必须知道内存架构<br>MMU(内存管理单元)：硬件组件负责处理CPU的内存访问请求</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/" data-id="cj9cwm2p9001n0ww986bma2zh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/19/操作系统-学习笔记-地址空间和地址生成/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          操作系统-学习笔记-地址空间和地址生成
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/18/操作系统-学习笔记-启动/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">操作系统-学习笔记-启动</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OS/">OS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hobby/">hobby</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uml/">uml</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hobby/">hobby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/literature/">literature</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plans/">plans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uml/">uml</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/OS/" style="font-size: 20px;">OS</a> <a href="/tags/hobby/" style="font-size: 10px;">hobby</a> <a href="/tags/literature/" style="font-size: 16.67px;">literature</a> <a href="/tags/notes/" style="font-size: 10px;">notes</a> <a href="/tags/plans/" style="font-size: 13.33px;">plans</a> <a href="/tags/uml/" style="font-size: 10px;">uml</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/26/操作系统-学习笔记-二级机会法/">操作系统-学习笔记-二级机会法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/26/电子烟/">电子烟</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/操作系统-学习笔记-时钟页面置换算法/">操作系统-学习笔记-时钟页面置换算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/操作系统-学习笔记-最近最久未使用算法/">操作系统-学习笔记-最近最久未使用算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 枳ukiyoe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

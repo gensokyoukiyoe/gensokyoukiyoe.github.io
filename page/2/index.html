@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>枳ukiyoe&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="枳ukiyoe's">
+<meta property="og:url" content="gensokyoukiyoe.github.io/page/2/index.html">
+<meta property="og:site_name" content="枳ukiyoe's">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="枳ukiyoe's">
+  
+    <link rel="alternate" href="/atom.xml" title="枳ukiyoe&#39;s" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <!--<link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">枳ukiyoe&#39;s</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="gensokyoukiyoe.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-操作系统-学习笔记-分页" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/22/操作系统-学习笔记-分页/" class="article-date">
+  <time datetime="2017-10-22T14:05:06.000Z" itemprop="datePublished">2017-10-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/22/操作系统-学习笔记-分页/">操作系统-学习笔记-分页</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><p>划分物理内存至固定大小的帧</p>
+<ul>
+<li>大小是2的幂， e.g. 512，4096，8192</li>
+</ul>
+<p>划分逻辑地址空间至相同大小的页</p>
+<ul>
+<li>大小是2的幂，e.g. 512，4096，8192</li>
+</ul>
+<p>建立方案 转换逻辑地址为物理地址</p>
+<ul>
+<li>页表</li>
+<li>MMU/TLB</li>
+</ul>
+<h4 id="帧-Frame"><a href="#帧-Frame" class="headerlink" title="帧(Frame)"></a>帧(Frame)</h4><p>物理内存被分割为大小相等的帧</p>
+<h4 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h4><p>一个内存物理地址是一个二元组(f,o)<br>f - 帧号(F位 共有2^F个帧)<br>o - 帧内偏移(S位，每帧有2^S字节)</p>
+<p>物理地址= 2^S * f+o<br>例： 16-bit的地址空间，9-bit大小的页帧<br>则(3,6)的物理地址为？</p>
+<p>F= 7, S=9, f=3, o=6<br>addr= 2^9 * 3+6=1542</p>
+<h4 id="虚拟地址"><a href="#虚拟地址" class="headerlink" title="虚拟地址"></a>虚拟地址</h4><p>一个程序的逻辑地址空间被划分为大小相等的页</p>
+<ul>
+<li>页内偏移的大小 = 帧内偏移的大小</li>
+<li>页号大小 &lt;==&gt; 帧号大小</li>
+</ul>
+<p>一个逻辑地址是一个二元组(p, o)<br>p - 页号(p位，2^p个页)<br>o - 帧内偏移(S位，每帧有2^S字节)<br>虚拟地址 = 2^P * f+o</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/22/操作系统-学习笔记-分页/" data-id="cj9cwm2oo00130ww97zec574y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-操作系统-学习笔记-非连续内存分配" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/20/操作系统-学习笔记-非连续内存分配/" class="article-date">
+  <time datetime="2017-10-20T04:19:02.000Z" itemprop="datePublished">2017-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/20/操作系统-学习笔记-非连续内存分配/">操作系统-学习笔记-非连续内存分配</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="非连续内存的分配"><a href="#非连续内存的分配" class="headerlink" title="非连续内存的分配"></a>非连续内存的分配</h4><h5 id="为什么要用非连续内存的分配"><a href="#为什么要用非连续内存的分配" class="headerlink" title="为什么要用非连续内存的分配"></a>为什么要用非连续内存的分配</h5><ul>
+<li>分段</li>
+<li>分页</li>
+<li>页表</li>
+</ul>
+<p>连续内存分配的缺点</p>
+<ul>
+<li>分配给一个程序的物理内存是连续的</li>
+<li>内存利用率较低</li>
+<li>有外碎片、内碎片的问题</li>
+</ul>
+<p>非连续分配的优点</p>
+<ul>
+<li>一个程序的物理地址空间是非连续的</li>
+<li>更好的内存利用和管理</li>
+<li>允许共享代码和数据(共享库等…)</li>
+<li>支持动态加载和动态链接</li>
+</ul>
+<p>非连续分配的缺点</p>
+<ul>
+<li>如何建立虚拟地址和物理地址之间的转换<br>　　软件方案(开销很大)<br>　　硬件方案</li>
+</ul>
+<p>两种硬件方案</p>
+<ul>
+<li>分段</li>
+<li>分页</li>
+</ul>
+<p>分段</p>
+<ul>
+<li>程序的分段地址空间</li>
+<li>分段寻址空间</li>
+</ul>
+<p>分段：更好的分离和共享</p>
+<h4 id="分段寻址方案"><a href="#分段寻址方案" class="headerlink" title="分段寻址方案"></a>分段寻址方案</h4><p>段访问机制</p>
+<p>新概念：一个段</p>
+<p>程序访问内存地址需要一个2维的二元组(s,addr):</p>
+<ul>
+<li>s：段号</li>
+<li>addr：段内偏移</li>
+</ul>
+<ol>
+<li>段寄存器+地址寄存器</li>
+<li>单地址实现方案</li>
+</ol>
+<p>段表</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/20/操作系统-学习笔记-非连续内存分配/" data-id="cj9cwm2pe001t0ww9z5z803ua" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-操作系统-学习笔记-连续内存分配" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/20/操作系统-学习笔记-连续内存分配/" class="article-date">
+  <time datetime="2017-10-20T03:18:22.000Z" itemprop="datePublished">2017-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/20/操作系统-学习笔记-连续内存分配/">操作系统-学习笔记-连续内存分配</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="连续内存分配"><a href="#连续内存分配" class="headerlink" title="连续内存分配"></a>连续内存分配</h4><h5 id="分区的动态分配"><a href="#分区的动态分配" class="headerlink" title="分区的动态分配"></a>分区的动态分配</h5><ul>
+<li>第一适配</li>
+<li>最佳适配</li>
+<li>最差适配</li>
+</ul>
+<h5 id="内存碎片问题"><a href="#内存碎片问题" class="headerlink" title="内存碎片问题"></a>内存碎片问题</h5><ul>
+<li>压缩式碎片整理</li>
+<li>交换式碎片整理</li>
+</ul>
+<h4 id="简单的内存管理方法"><a href="#简单的内存管理方法" class="headerlink" title="简单的内存管理方法"></a>简单的内存管理方法</h4><p>当一个程序准许运行在内存中时，分配一个连续的区间<br>分配一个连续的内存区间给运行的程序以访问数据</p>
+<h4 id="分配策略"><a href="#分配策略" class="headerlink" title="分配策略"></a>分配策略</h4><ul>
+<li>首次适配</li>
+<li>最佳适配</li>
+<li>最差适配</li>
+</ul>
+<h4 id="首次适配"><a href="#首次适配" class="headerlink" title="首次适配"></a>首次适配</h4><h5 id="基本原理-amp-实现"><a href="#基本原理-amp-实现" class="headerlink" title="基本原理 &amp; 实现"></a>基本原理 &amp; 实现</h5><ul>
+<li><p>简单实现</p>
+</li>
+<li><p>需求：<br>　　　　按地址排序的空闲块列表<br>　　　　分配需要寻找一个合适的分区<br>　　　　重分配需要检查，看是否自由分区能合并于相邻的空闲分区(若有)</p>
+</li>
+<li><p>优势:<br>　　　　简单<br>　　　　易于产生更大空闲块，向着地址空间的结尾</p>
+</li>
+<li><p>劣势:<br>　　　　外部碎片<br>　　　　不确定性</p>
+</li>
+</ul>
+<h4 id="最佳适配"><a href="#最佳适配" class="headerlink" title="最佳适配"></a>最佳适配</h4><ul>
+<li>为了分配n字节，使用最小的可用空闲块，以致块的尺寸比n大</li>
+</ul>
+<h5 id="基本原理-amp-实现-1"><a href="#基本原理-amp-实现-1" class="headerlink" title="基本原理 &amp; 实现"></a>基本原理 &amp; 实现</h5><ul>
+<li>为了避免分割大空闲块</li>
+<li>为了最小化外部碎片产生的尺寸</li>
+<li><p>需求：<br>　　　　按尺寸排列的空闲块列表<br>　　　　分配需要寻找一个合适的分区<br>　　　　重分配需搜索和合并相邻的空闲分区，若有</p>
+</li>
+<li><p>优势：<br>　　　　当大部分分配是小尺寸时非常有效<br>　　　　比较简单</p>
+</li>
+<li><p>劣势：<br>　　　　外部碎片<br>　　　　重分配慢<br>　　　　易产生很多没用的微小碎片(不怎么好)</p>
+</li>
+</ul>
+<h4 id="最差适配"><a href="#最差适配" class="headerlink" title="最差适配"></a>最差适配</h4><ul>
+<li>为了避免有太多微小碎片</li>
+<li><p>需求：<br>　　　　按尺寸排列的空闲块列表<br>　　　　分配很快(获得最大的分区)<br>　　　　重分配需要合并于相邻的空闲分区，若有。然后调整空闲块列表</p>
+</li>
+<li><p>优势：<br>　　　　假如分配是中等尺寸效果最好</p>
+</li>
+<li><p>劣势：<br>　　　　重分配慢<br>　　　　外部碎片<br>　　　　易于破碎大的空闲块以致大分区无法被分配</p>
+</li>
+</ul>
+<h4 id="压缩式碎片整理"><a href="#压缩式碎片整理" class="headerlink" title="压缩式碎片整理"></a>压缩式碎片整理</h4><ul>
+<li>重置程序以合并孔洞</li>
+<li>要求所有的程序是 动态可重置的</li>
+<li>议题：<br>　　　　合适重置？<br>　　　　开销</li>
+</ul>
+<h4 id="交换式碎片整理"><a href="#交换式碎片整理" class="headerlink" title="交换式碎片整理"></a>交换式碎片整理</h4><ul>
+<li>运行的程序需要更多的内存</li>
+<li>抢占等待的程序 &amp; 回收它们的内容</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/20/操作系统-学习笔记-连续内存分配/" data-id="cj9cwm2pb001q0ww9yxcv8f2q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-操作系统-学习笔记-地址空间和地址生成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/19/操作系统-学习笔记-地址空间和地址生成/" class="article-date">
+  <time datetime="2017-10-19T14:56:55.000Z" itemprop="datePublished">2017-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/19/操作系统-学习笔记-地址空间和地址生成/">操作系统-学习笔记-地址空间和地址生成</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="地址空间-amp-地址生成"><a href="#地址空间-amp-地址生成" class="headerlink" title="地址空间 &amp; 地址生成"></a>地址空间 &amp; 地址生成</h4><p>地址空间定义<br>地址生成<br>地址安全检查</p>
+<h4 id="地址空间"><a href="#地址空间" class="headerlink" title="地址空间"></a>地址空间</h4><p>物理地址空间 - 硬件支持的地址空间</p>
+<ul>
+<li>起始地址0，到地址MAXsys</li>
+</ul>
+<h4 id="逻辑地址空间"><a href="#逻辑地址空间" class="headerlink" title="逻辑地址空间"></a>逻辑地址空间</h4><p>一个运行的程序所拥有的内存范围</p>
+<ul>
+<li>起始地址0，到地址MAXprog</li>
+</ul>
+<h4 id="逻辑地址生成"><a href="#逻辑地址生成" class="headerlink" title="逻辑地址生成"></a>逻辑地址生成</h4><p>编译-&gt; 汇编 -&gt; 链接 -&gt; 载入(程序重定位)</p>
+<h4 id="物理地址生成"><a href="#物理地址生成" class="headerlink" title="物理地址生成"></a>物理地址生成</h4><h5 id="CPU方面"><a href="#CPU方面" class="headerlink" title="CPU方面"></a>CPU方面</h5><ol>
+<li>运算器需要在逻辑地址的内存内容</li>
+<li>内存管理单元寻找在逻辑地址和物理地址之间的映射</li>
+<li>控制器从总线发送在物理地址的内存内容的请求</li>
+</ol>
+<h5 id="内存方面"><a href="#内存方面" class="headerlink" title="内存方面"></a>内存方面</h5><ol>
+<li>内存发送物理地址内存的内容给CPU</li>
+</ol>
+<h5 id="操作系统方面"><a href="#操作系统方面" class="headerlink" title="操作系统方面"></a>操作系统方面</h5><p>建立逻辑地址和物理地址之间的映射</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/19/操作系统-学习笔记-地址空间和地址生成/" data-id="cj9cwm2ot00180ww98rmpz769" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-操作系统-学习笔记-计算机体系结构及内存分层体系" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/" class="article-date">
+  <time datetime="2017-10-19T05:04:33.000Z" itemprop="datePublished">2017-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/">操作系统-学习笔记-计算机体系结构及内存分层体系</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>计算机体系结构/内存分层结构</p>
+<p>地址空间 &amp; 地址生成</p>
+<p>连续地址分配</p>
+<h4 id="计算机体系结构-内存分层结构"><a href="#计算机体系结构-内存分层结构" class="headerlink" title="计算机体系结构/内存分层结构"></a>计算机体系结构/内存分层结构</h4><p>计算机体系结构<br>内存分层结构<br>在操作系统的内存管理范例</p>
+<h4 id="CPU处理速度"><a href="#CPU处理速度" class="headerlink" title="CPU处理速度"></a>CPU处理速度</h4><p>寄存器&gt; L1缓存&gt; L2缓存 &gt; 主存 &gt; 磁盘(虚拟内存)</p>
+<blockquote><p>内存 Memory 由二部分组成<br>第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要存放数据和程序的地方，所以也叫做“主存”，也就是我们平常说的，内存条，一旦断电数据就丢失了;</p><br><p>第二部分：Read-Only Memory（ROM），只读存储器，对于用户来说，它只能读取数据，不能写入信息，断电也没有关系，放ROM的数据一辈子都不会变，旧式电脑的BIOS放在ROM上</p><br><p><img src="https://pic3.zhimg.com/50/57accc32a92e037d96e9aa9211f9438a_hd.png" alt="存储器结构图"></p><footer><strong>DADAman</strong><cite><a href="https://www.zhihu.com/question/28445273" target="_blank" rel="external">电脑的主存储器和主存、内存的关系是什么？</a></cite></footer></blockquote>
+<h4 id="操作系统要完成的目标："><a href="#操作系统要完成的目标：" class="headerlink" title="操作系统要完成的目标："></a>操作系统要完成的目标：</h4><p>抽象：逻辑地址空间<br>保护：独立地址空间<br>共享：访问相同内存<br>虚拟化：更多的地址空间</p>
+<h4 id="操作系统管理内存的不同方法："><a href="#操作系统管理内存的不同方法：" class="headerlink" title="操作系统管理内存的不同方法："></a>操作系统管理内存的不同方法：</h4><p>程序重定位<br>分段<br>分页<br>虚拟内存<br>按需分页虚拟内存</p>
+<h4 id="实现高度依赖硬件"><a href="#实现高度依赖硬件" class="headerlink" title="实现高度依赖硬件"></a>实现高度依赖硬件</h4><p>必须知道内存架构<br>MMU(内存管理单元)：硬件组件负责处理CPU的内存访问请求</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/" data-id="cj9cwm2p9001n0ww986bma2zh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-操作系统-学习笔记-启动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/18/操作系统-学习笔记-启动/" class="article-date">
+  <time datetime="2017-10-18T14:10:40.000Z" itemprop="datePublished">2017-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/操作系统-学习笔记-启动/">操作系统-学习笔记-启动</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="BIOS："><a href="#BIOS：" class="headerlink" title="BIOS："></a>BIOS：</h4><p>将Bootloader从磁盘引导扇区(512bytes)加载到0x7c00<br>跳转到CS：IP=0000：7c00</p>
+<h4 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h4><p>将操作系统代码和数据从硬盘加载到内存中</p>
+<p>系统调用：应用程序主动向操作系统发出</p>
+<p>异常(来源于不良的应用程序)：非法指令或其他坏的处理状态(内存出错)</p>
+<p>中断(来源于设备)：来自不同的硬件设备的计时器和网络中断</p>
+<p>处理时间：<br>中断：异步<br>异常：同步<br>系统调用： 同步或异步</p>
+<p>响应时间：<br>中断：持续，对用户应用程序是透明的<br>异常：杀死或重新执行意想不到的应用程序指令<br>系统调用：等待和持续</p>
+<h4 id="中断-中断表"><a href="#中断-中断表" class="headerlink" title="中断  中断表"></a>中断  中断表</h4><h5 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h5><p>设置中断标记[cpu初始化]</p>
+<ol>
+<li>将内部、外部事件设置中断标记</li>
+<li>中断事件的id</li>
+</ol>
+<h5 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h5><ol>
+<li>保存当前处理的状态</li>
+<li>中断服务程序处理</li>
+<li>清楚中断标记</li>
+<li>恢复之前保存的处理状态</li>
+</ol>
+<h4 id="异常：异常编号"><a href="#异常：异常编号" class="headerlink" title="异常：异常编号"></a>异常：异常编号</h4><h5 id="保存现场"><a href="#保存现场" class="headerlink" title="保存现场"></a>保存现场</h5><h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><ol>
+<li>杀死产生了异常的程序</li>
+<li>重新执行异常指令<h5 id="恢复现场-也是透明的，用户感知不到"><a href="#恢复现场-也是透明的，用户感知不到" class="headerlink" title="恢复现场(也是透明的，用户感知不到)"></a>恢复现场(也是透明的，用户感知不到)</h5></li>
+</ol>
+<h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><p>系统调用接口<br>例： 应用程序调用printf() ，会 调用系统调用write()</p>
+<p>接口而不是直接进行系统调用</p>
+<p>win32 api：windows<br>posix api：posix-base systems，包括unix，linux，mac<br>java api：jvm</p>
+<p>操作系统 用户态，内核态</p>
+<h4 id="跨越操作系统边界的开销"><a href="#跨越操作系统边界的开销" class="headerlink" title="跨越操作系统边界的开销"></a>跨越操作系统边界的开销</h4><ul>
+<li>在执行时间上的开销超过程序调用</li>
+<li>开销：<br>建立中断/异常/系统调用号与对应服务例程映射关系的初始化开销<br>建立内核堆栈<br>验证参数<br>内核态映射到用户态的地址空间，更新页面映射权限<br>内核态独立地址空间  TLB</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/18/操作系统-学习笔记-启动/" data-id="cj9cwm2or00170ww9ey4i3pl3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo如何添加音乐-视频" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/18/hexo如何添加音乐-视频/" class="article-date">
+  <time datetime="2017-10-18T02:21:23.000Z" itemprop="datePublished">2017-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/hexo如何添加音乐-视频/">hexo如何添加音乐/视频</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="markdown兼容html，采用html标签添加"><a href="#markdown兼容html，采用html标签添加" class="headerlink" title="markdown兼容html，采用html标签添加"></a>markdown兼容html，采用html标签添加</h4><h5 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=400 height=500 src=&quot;/video/tt.mp4&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="400" height="500" src="/video/tt.mp4"></iframe>
+
+<h5 id="播放音乐"><a href="#播放音乐" class="headerlink" title="播放音乐"></a>播放音乐</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=462342208&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=462342208&auto=1&height=66"></iframe>
+
+
+<h4 id="通过hexo插件播放"><a href="#通过hexo插件播放" class="headerlink" title="通过hexo插件播放"></a>通过hexo插件播放</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% aplayer &quot;Caffeine&quot; &quot;Jeff Williams&quot; &quot;http://7xq131.com1.z0.glb.clouddn.com/Preparation.mp3&quot; &quot;autoplay&quot; %&#125;</div><div class="line"></div><div class="line">&#123;% dplayer &quot;url=http://devtest.qiniudn.com/若能绽放光芒.mp4&quot; &quot;api=http://dplayer.daoapp.io&quot; &quot;pic=http://devtest.qiniudn.com/若能绽放光芒.png&quot; &quot;id=9E2E3368B56CDBB4&quot; &quot;loop=yes&quot; &quot;theme=#FADFA3&quot; &quot;autoplay=false&quot; &quot;token=tokendemo&quot; %&#125;</div></pre></td></tr></table></figure>
+<p>不想搞了，这个总有错，给个链接，想弄的去看 <a href="http://www.jianshu.com/p/53e0d2a617da" target="_blank" rel="external">传送门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/18/hexo如何添加音乐-视频/" data-id="cj9cwm2mx00020ww9dr3j5uel" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-uml-学习笔记-UP过程和瀑布模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/17/uml-学习笔记-UP过程和瀑布模型/" class="article-date">
+  <time datetime="2017-10-17T08:19:15.000Z" itemprop="datePublished">2017-10-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/uml-学习笔记-UP过程和瀑布模型/">uml-学习笔记-UP过程和瀑布模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是UP"><a href="#什么是UP" class="headerlink" title="什么是UP"></a>什么是UP</h4><ul>
+<li>软件开发过程(software development process)描述了构造、部署、以及维护软件的方式。统一过程(The Unified Software Development Process)是一种流行的构造面向对象系统的迭代软件开发过程。特别是，Rational统一过程(Rational Unified Process,RUP)是对统一过程的详细精化，并且已经被广泛采纳</li>
+</ul>
+<ul>
+<li>UP也可以引进其他方法中有用的实践，比如说极限编程(Extreme Programming,XP)。 XP中的测试驱动开发(test-driven development)、重构(refactoring) 和持续集成(continuous integration)等。</li>
+</ul>
+<p>UP特点</p>
+<ol>
+<li></li>
+<li>用例驱动</li>
+<li>迭代和增量式开发</li>
+</ol>
+<h4 id="什么是瀑布生命模型-？"><a href="#什么是瀑布生命模型-？" class="headerlink" title="什么是瀑布生命模型 ？"></a>什么是瀑布生命模型 ？</h4><ul>
+<li>瀑布模型（Waterfall Model） 是一个项目开发架构，开发过程是通过设计一系列阶段顺序展开的，从系统需求分析开始直到产品发布和维护，每个阶段都会产生循环反馈，因此，如果有信息未被覆盖或者发现了问题，那么最好 “返回”上一个阶段并进行适当的修改，项目开发进程从一个阶段“流动”到下一个阶段，这也是瀑布模型名称的由来。包括软件工程开发、企业项目开发、产品生产以及市场销售等构造瀑布模型。</li>
+</ul>
+<h4 id="瀑布模型优缺点"><a href="#瀑布模型优缺点" class="headerlink" title="瀑布模型优缺点"></a>瀑布模型优缺点</h4><h5 id="瀑布模型有以下优点"><a href="#瀑布模型有以下优点" class="headerlink" title="瀑布模型有以下优点"></a>瀑布模型有以下优点</h5><ol>
+<li>为项目提供了按阶段划分的检查点。</li>
+<li>当前一阶段完成后，您只需要去关注后续阶段。</li>
+<li>可在迭代模型中应用瀑布模型。<br>增量迭代应用于瀑布模型。迭代1解决最大的问题。每次迭代产生一个可运行的版本,同时增加更多的功能。每次迭代必须经过质量和集成测试。</li>
+<li>它提供了一个模板，这个模板使得分析、设计、编码、测试和支持的方法可以在该模板下有一个共同的指导。</li>
+</ol>
+<h5 id="瀑布模型有以下缺点"><a href="#瀑布模型有以下缺点" class="headerlink" title="瀑布模型有以下缺点"></a>瀑布模型有以下缺点</h5><ol>
+<li>各个阶段的划分完全固定，阶段之间产生大量的文档，极大地增加了工作量。</li>
+<li>由于开发模型是线性的，用户只有等到整个过程的末期才能见到开发成果，从而增加了开发风险。</li>
+<li>通过过多的强制完成日期和里程碑来跟踪各个项目阶段。</li>
+<li>瀑布模型的突出缺点是不适应用户需求的变化。</li>
+</ol>
+<h4 id="UML概述"><a href="#UML概述" class="headerlink" title="UML概述"></a>UML概述</h4><h5 id="uml-包括："><a href="#uml-包括：" class="headerlink" title="uml 包括："></a>uml 包括：</h5><p> 　　　　　1. 事物<br> 　　　　　2. 关系<br> 　　　　　3. 图<br> 　　　　　4. 扩展机制</p>
+<h5 id="事物"><a href="#事物" class="headerlink" title="事物"></a>事物</h5><p>　　　　1. 结构：类，接口，构件，节点(数据库节点，服务器节点，打印机)等等<br>　　　　2. 行为：交互(信息)、状态(通过状态图、活动图)等等<br>　　　　3. 分组：包，子系统(可以描述依赖关系)等等<br>　　　　4. 注释：注释(有时注释比画图更方便)</p>
+<h5 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h5><p>　　　　依赖，关联(聚合、组合)、泛化、实现</p>
+<h5 id="图-相当于选取一种角度来观察系统"><a href="#图-相当于选取一种角度来观察系统" class="headerlink" title="图 (相当于选取一种角度来观察系统)"></a>图 (相当于选取一种角度来观察系统)</h5><p>　　　　　用例图、交互图(顺序图、协作图)、类图、活动图、状态图等等</p>
+<ol>
+<li>用例图：用例图是指由参与者（Actor）、用例（Use Case），边界以及它们之间的关系构成的用于描述系统功能的视图。</li>
+</ol>
+<ul>
+<li>例： 从需求的角度分析，系统应该有添加用户、删除用户、查询用户等，而且这个用户管理功能只有系统管理员才能有，普通用户不能做，<br>so 这个系统管理员在这个系统里属于一个参与者，即描述一个功能需要从参与者的角度。</li>
+</ul>
+<ol>
+<li>交互图:描述对象之间的关系以及对象之间的信息传递的图。序列图（时序图）、协作图和通信图、交互概览图统称交互图。</li>
+</ol>
+<ul>
+<li>例： 系统管理员添加用户  (我要描述如何交互，这是文字版，可以用顺序图来实现法)</li>
+</ul>
+<ol>
+<li>系统管理员请求系统，打开添加用户的界面</li>
+<li>系统显示该界面</li>
+<li>管理员输入用户的相关信息，提交</li>
+<li><p>系统存储用户的信息，并向系统管理员返回“添加用户成功”的响应。</p>
+</li>
+<li><p>类图(Class diagram):显示了模型的静态结构，特别是模型中存在的类、类的内部结构以及它们与其他类的关系等。</p>
+</li>
+</ol>
+<ul>
+<li>例：描述人和部门是多对1的关系    ，画一个人，然后画一个部门，连线说明人和部门是多对一的关系</li>
+</ul>
+<ol>
+<li>活动图（activity diagram，动态图）:阐明了业务用例实现的工作流程。业务工作流程说明了业务为向所服务的业务主角提供其所需的价值而必须完成的工作。</li>
+</ol>
+<ul>
+<li>例： 登录这个过程</li>
+</ul>
+<ol>
+<li>打开登录界面，输入用户名和密码，点击登录。</li>
+<li>后台判断： 用户名不存在？返回登录界面：(密码不正确？返回登录界面：(用户状态不可用？返回登录界面：登录成功))</li>
+<li><p>进入系统管理员主界面</p>
+</li>
+<li><p>状态图(Statechart Diagram):描述一个实体基于事件反应的动态行为，显示了该实体如何根据当前所处的状态对不同的事件做出反应。<br>例：校园卡的状态：</p>
+</li>
+<li>正常状态</li>
+<li>冻结状态(通过挂失这个行为)</li>
+<li>回收状态(通过注销这个动作)<br>注意：正常状态不能直接进入回收吗，要通过注销去掉关联</li>
+</ol>
+<h5 id="拓展机制"><a href="#拓展机制" class="headerlink" title="拓展机制:"></a>拓展机制:</h5><p>　　　　　Stereotype(版型)、Tagged Value(标签值)、 Constraint(约束)<br>这有在特定的情景或环境才有用</p>
+<h4 id="图的分类"><a href="#图的分类" class="headerlink" title="图的分类"></a>图的分类</h4><h5 id="静态建模"><a href="#静态建模" class="headerlink" title="静态建模"></a>静态建模</h5><ul>
+<li>类图</li>
+</ul>
+<h5 id="动态建模"><a href="#动态建模" class="headerlink" title="动态建模"></a>动态建模</h5><ul>
+<li>顺序图</li>
+<li>用例图</li>
+<li>活动图</li>
+<li>状态图</li>
+</ul>
+<h4 id="学习的顺序："><a href="#学习的顺序：" class="headerlink" title="学习的顺序："></a>学习的顺序：</h4><ul>
+<li>从最重要的部分开始！</li>
+<li>类图 -&gt; 顺序图 -&gt; 用例图 -&gt; 活动图 -&gt; 状态图</li>
+</ul>
+<p><img src="/images/yonglitu.png" alt="几种图"></p>
+<h4 id="Rational-Rose-是一种建模工具"><a href="#Rational-Rose-是一种建模工具" class="headerlink" title="Rational Rose 是一种建模工具"></a>Rational Rose 是一种建模工具</h4><ul>
+<li><p>用例视图：需求分析阶段的利器</p>
+</li>
+<li><p>逻辑视图：设计阶段，用例的实现</p>
+</li>
+<li><p>组件视图：构建表示封装了其内容的系统模块；构件是相对独立的模块</p>
+</li>
+<li><p>部署视图：表示软件元素在物理架构上的部署，以及物理元素之间的通信</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/17/uml-学习笔记-UP过程和瀑布模型/" data-id="cj9cwm2ng00070ww96avyzimw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-学习计划-10-17" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/17/学习计划-10-17/" class="article-date">
+  <time datetime="2017-10-17T07:46:02.000Z" itemprop="datePublished">2017-10-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/学习计划-10-17/">学习计划_10/17</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前三门是必修，肯定优先级更高</p>
+<h4 id="ambition："><a href="#ambition：" class="headerlink" title="ambition："></a>ambition：</h4><h5 id="uml-：10"><a href="#uml-：10" class="headerlink" title="uml ：10"></a>uml ：10</h5><h5 id="编译原理-：词法分析器-c"><a href="#编译原理-：词法分析器-c" class="headerlink" title="编译原理 ：词法分析器(c)"></a>编译原理 ：词法分析器(c)</h5><h5 id="操作系统-10"><a href="#操作系统-10" class="headerlink" title="操作系统: 10"></a>操作系统: 10</h5><h5 id="omnet-：生成网络拓扑图"><a href="#omnet-：生成网络拓扑图" class="headerlink" title="omnet++ ：生成网络拓扑图"></a>omnet++ ：生成网络拓扑图</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/17/学习计划-10-17/" data-id="cj9cwm2oj000x0ww96wa71zoy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-uml-学习笔记-OOA-D" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/17/uml-学习笔记-OOA-D/" class="article-date">
+  <time datetime="2017-10-17T05:06:49.000Z" itemprop="datePublished">2017-10-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/uml-学习笔记-OOA-D/">uml-学习笔记-OOA/D</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>uml只是一种图形表示法，重要的还是OOA/D</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>分析(analysis)：对问题和需求的调查研究<br>设计(design)：满足需求的概念上的解决方案</p>
+<p>面向对象分析（OOA）：在问题领域内发现和描述对象<br>面向对象设计（OOD）：如何定义软件对象及它们之间如何协作以实现需求</p>
+<h4 id="软件建模"><a href="#软件建模" class="headerlink" title="软件建模"></a>软件建模</h4><p>静态： 各模块的部署，都有哪些东西，什么概念<br>动态： 各模块的交互，<br>工具：rational rose</p>
+<h4 id="骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输"><a href="#骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输" class="headerlink" title="骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输"></a>骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输</h4><p>过程： 定义用例 -&gt;  定义领域模型 -&gt; 定义交互图 -&gt;  定义设计类图(静态建模)</p>
+<p>定义用例(用例是需求分析的一种工具，它是一些情节的描述)</p>
+<ul>
+<li>骰子游戏</li>
+</ul>
+<ol>
+<li>游戏者请求骰子</li>
+<li>系统展示结果：如果骰子的总点数是7，则游戏者赢，否则游戏者输</li>
+</ol>
+<p>定义领域模型(OOA)：识别问题中的概念，它是对真实世界领域中的概念和想象可视化，与具体实现的软件技术无关(比如说java或c#)</p>
+<ul>
+<li>游戏者</li>
+<li>骰子</li>
+<li>骰子游戏</li>
+</ul>
+<h4 id="应用uml的三种方式："><a href="#应用uml的三种方式：" class="headerlink" title="应用uml的三种方式："></a>应用uml的三种方式：</h4><ol>
+<li>草图()</li>
+<li>蓝图(指导开发，不必特别细或为了以后维护)</li>
+<li>编程语言</li>
+</ol>
+<p>MDA(模型驱动体系架构)</p>
+<h4 id="学习uml的要素："><a href="#学习uml的要素：" class="headerlink" title="学习uml的要素："></a>学习uml的要素：</h4><ol>
+<li>表示法 - 图形   [重点]</li>
+<li>过程 - (uml与过程无关，但最好用于RUP) [了解]</li>
+<li>工具 - (比如： Rational Rose)  [了解]</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="gensokyoukiyoe.github.io/2017/10/17/uml-学习笔记-OOA-D/" data-id="cj9cwm2n100040ww9ixmsiaer" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plans/">plans</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OS/">OS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hobby/">hobby</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uml/">uml</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hobby/">hobby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/literature/">literature</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plans/">plans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uml/">uml</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/OS/" style="font-size: 20px;">OS</a> <a href="/tags/hobby/" style="font-size: 10px;">hobby</a> <a href="/tags/literature/" style="font-size: 16.67px;">literature</a> <a href="/tags/notes/" style="font-size: 10px;">notes</a> <a href="/tags/plans/" style="font-size: 13.33px;">plans</a> <a href="/tags/uml/" style="font-size: 10px;">uml</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/26/操作系统-学习笔记-二级机会法/">操作系统-学习笔记-二级机会法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/26/电子烟/">电子烟</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/操作系统-学习笔记-时钟页面置换算法/">操作系统-学习笔记-时钟页面置换算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/25/操作系统-学习笔记-最近最久未使用算法/">操作系统-学习笔记-最近最久未使用算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 枳ukiyoe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
