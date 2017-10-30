@@ -186,6 +186,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -228,12 +258,745 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/23/操作系统-学习笔记-虚拟内存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/23/操作系统-学习笔记-虚拟内存/" itemprop="url">操作系统-学习笔记-虚拟内存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T22:37:42+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>起因<br>覆盖技术<br>交换技术<br>虚存技术</p>
+<ul>
+<li>目标</li>
+<li>程序局部性原理</li>
+<li>基本概念</li>
+<li>基本特征</li>
+<li>虚拟页式内存管理</li>
+</ul>
+<p>理想中的存储器：<br>更大、更快、更便宜的非易失性存储器</p>
+<p>在计算机系统中，尤其是在多道程序运行的环境下，可能会出现内存不够的情况，怎么办？</p>
+<ul>
+<li>如果是程序太大，超过了内存的容量可以采用手动的覆盖(overlay)技术，只把需要的指令和数据保存在内存当中</li>
+<li>如果是程序太多，超过了内存的容量，可以采用自动的交换(swapping)技术，把暂时不能执行的程序送到外存中</li>
+<li>如果想要在有限容量的内存中，以更小的页粒度为单位装入更多更大的程序，可以采用自动的虚拟存储技术</li>
+</ul>
+<h4 id="覆盖技术"><a href="#覆盖技术" class="headerlink" title="覆盖技术"></a>覆盖技术</h4><p>目标：<br>是在较小的可用内存中运行较大的程序。常用于多道程序系统，与分区存储管理配合使用</p>
+<p>原理：<br>把程序按照其自身逻辑结构，划分为若干个功能上相对独立的程序模块，那些不会同时执行的模块共享同一块内存区域，按时间先后来运行。</p>
+<ul>
+<li>必要部分(常用功能)的代码和数据常驻内存</li>
+<li>可选部分(不常用功能)在其他程序模块中实现，平时存放在外存中，需要时才放到内存</li>
+<li>不存在调用关系的模块不必同时装入到内存，从而可以相互覆盖，即这些模块共用一个分区</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>由程序员来把一个大的程序划分为若干个小的功能模块，并确定各个模块之间的覆盖关系，费时费力，增长了编程的复杂度</li>
+<li>覆盖模块由外存装入内存，实际上是以时间延长来换取空间节省</li>
+</ul>
+<h4 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h4><p>目标:</p>
+<ul>
+<li><p>多道程序在内存中时，让正在运行的程序或需要运行的程序获得更多的内存资源</p>
+</li>
+<li><p>方法：<br>可将暂时不能运行的程序送到外存，从而获得空闲内存空间</p>
+</li>
+</ul>
+<p>操作系统把一个进程的整个地址空间的内容保存到外存中(换出swap out)，而将外存的某个进程的地址空间读入到内存(swap in). 换入换出内容的大小为整个程序的地址空间</p>
+<p>交换技术实现中的几个问题</p>
+<ul>
+<li>交换时机的确定：何时需要发生交换？只当内存空间不够或有不够的危险时换出；</li>
+<li>交换区的大小：必须足够大以存放所有用户进程的所有内存映射的拷贝，必须能对这些内存映像进行直接存取</li>
+<li>程序换入时的重定位：换出后再换入的内存位置一定要在原来的位置上吗？最好采用动态地址映射的方法</li>
+</ul>
+<h4 id="覆盖和交换的比较"><a href="#覆盖和交换的比较" class="headerlink" title="覆盖和交换的比较"></a>覆盖和交换的比较</h4><ul>
+<li>覆盖只能发生在那些相互之间没有调用关系的程序模块之间，因此程序员必须给出程序内的各个模块之间的逻辑覆盖结构。</li>
+<li>交换技术是以内存中的程序大小为单位进行的，他不需要程序员给出程序内的各个模块之间的逻辑覆盖结构。<br>换言之，交换发生在内存中程序与管理程序或操作系统之间，而覆盖发生在运行程序的内部</li>
+</ul>
+<h4 id="虚存技术–目标"><a href="#虚存技术–目标" class="headerlink" title="虚存技术–目标"></a>虚存技术–目标</h4><p>在内存不够用的情形下，可以采用覆盖技术和交换技术，但是</p>
+<ul>
+<li>覆盖技术：需要程序员自己把整个程序划分为若干个小的功能模块，并确定各个模块之间的覆盖关系，增加程序员的负担</li>
+<li>交换技术：以进程作为交换的单位，需要把进程的整个地址空间都换出换入，增大了处理器的开销</li>
+</ul>
+<p>目标<br>像覆盖技术那样，不是把程序的所有内容都放入内存中，因而能够运行比当前的空闲内存空间还要大的程序。但做的更好，又操作系统自己来完成，无须程序员的干涉</p>
+<p>像交换技术那样，能够实现进程在内存和外存之间的交换，因而获得更多的空闲内存空间。但做得更好，只对进程的部分内容在内存和外存之间交换。</p>
+<h4 id="虚存技术–程序的局部性原理"><a href="#虚存技术–程序的局部性原理" class="headerlink" title="虚存技术–程序的局部性原理"></a>虚存技术–程序的局部性原理</h4><ul>
+<li>程序的局部性原理(principle of locality):指程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限在一定的区域<br>–时间局部性：一条指令的一次执行和下次执行，一个数据的一次访问和下次访问都集中在一个较短时期内；<br>–空间局部性：当前指令和邻近的几条指令，当前访问的数据和邻近的几个数据都集中在一个较小的区域。</li>
+</ul>
+<p>程序的局部性原理表明，从理论上来讲，虚存技术是能够实现的，而且在实现了以后应该是能够取得一个满意的效果</p>
+<h4 id="虚存技术–基本概念"><a href="#虚存技术–基本概念" class="headerlink" title="虚存技术–基本概念"></a>虚存技术–基本概念</h4><p>可以在页式或段式内存管理的基础上实现</p>
+<ul>
+<li><p>在装入程序时，不必将其全部装入到内存，而只需将当前需要执行的部分页面或段装入到内存，就可以让程序开始执行</p>
+</li>
+<li><p>在程序执行过程中，如果需执行的指令或访问的数据尚未在内存(称为缺页或缺段)，则由处理器通知操作系统将相应的页面或段调入到内存，然后继续执行程序</p>
+</li>
+<li><p>另一方面，操作系统将内存中暂时不使用的页面或段调出保存在外存上，从而腾出更多空闲空间存放将要装入的程序以及将要调入的页面或段</p>
+</li>
+</ul>
+<h4 id="虚存技术–基本特征"><a href="#虚存技术–基本特征" class="headerlink" title="虚存技术–基本特征"></a>虚存技术–基本特征</h4><p>大的用户空间：通过把物理内存与外存相结合，提供给用户的虚拟内存空间通常大于实际的物理内存，即实现了这两者的分离。如32位的虚拟地址理论上可以访问4GB，而可能计算机上仅有256M的物理内存，但硬盘容量大于4GB。</p>
+<p>部分交换：与交换技术相比较，虚拟存储的调入与调出是对部分虚拟地址空间进行的</p>
+<p>不连续性：物理内存分配的不连续，虚拟地址空间使用的不连续</p>
+<h4 id="虚存技术–虚拟页式内存管理"><a href="#虚存技术–虚拟页式内存管理" class="headerlink" title="虚存技术–虚拟页式内存管理"></a>虚存技术–虚拟页式内存管理</h4><p>大部分虚拟存储系统都是采用虚拟页式存储管理技术，即在页式存储管理的基础上，增加请求调页和页面置换功能</p>
+<p>基本思路：<br>当一个用户程序需要调入内存运行时，不是将该程序的所有页面都装入内存，而是只装入部分的页面，就可启动程序运行<br>在运行的过程中，如果发现要运行的程序或要访问的数据不在内存，则向系统发出缺页中断请求，系统在处理这个中断时，将外存中相应的页面调入内存，使得该程序能够继续运行</p>
+<h4 id="后备存储-backing-Store"><a href="#后备存储-backing-Store" class="headerlink" title="后备存储(backing Store)"></a>后备存储(backing Store)</h4><p>在何处保存未被映射的页？</p>
+<ul>
+<li>能够简单地识别在二级存储器中的页</li>
+<li>交换空间(磁盘或者文件)：特殊格式，用于存储未被映射的页面</li>
+</ul>
+<p>概念：后备存储</p>
+<ul>
+<li>一个虚拟地址空间的页面可以被映射到一个文件(在二级存储中)中的某个位置</li>
+<li>代码段：映射到可执行二进制文件</li>
+<li>动态加载的共享库程序段：映射到动态调用的库文件</li>
+<li>其他段：可能被映射到交换文件(swap file)</li>
+</ul>
+<h4 id="虚拟内存性能"><a href="#虚拟内存性能" class="headerlink" title="虚拟内存性能"></a>虚拟内存性能</h4><p>为了便于理解分页的开销，使用有效存储器访问时间effective memory access time(EAT)</p>
+<ul>
+<li>EAT = 访存时间 <em> 页表命中率+page fault处理时间 </em> page fault 几率</li>
+</ul>
+<p>例子：<br>访存时间：10ns<br>磁盘访问时间：5ms<br>参数p=page fault几率<br>参数q=dirty page几率</p>
+<p>EAT =10(1-p) + 5,000,000p(1+q)</p>
+<p>EAT 主要取决于p</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/23/uml-学习笔记-RationalRose使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/23/uml-学习笔记-RationalRose使用/" itemprop="url">uml-学习笔记-RationalRose使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T13:25:41+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/uml/" itemprop="url" rel="index">
+                    <span itemprop="name">uml</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>创建一个类图<br><img src="./p1.png" height="600" width="800"></p>
+<p>创建一个接口<br><img src="./p2.png" height="600" width="800"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/22/操作系统-学习笔记-页表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/22/操作系统-学习笔记-页表/" itemprop="url">操作系统-学习笔记-页表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T23:21:35+08:00">
+                2017-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="页表概述"><a href="#页表概述" class="headerlink" title="页表概述"></a>页表概述</h4><ul>
+<li>页表概念</li>
+<li>转换后备缓冲区(TLB)</li>
+<li>二级/多级 页表</li>
+<li>反向页表</li>
+</ul>
+<h4 id="页表结构"><a href="#页表结构" class="headerlink" title="页表结构"></a>页表结构</h4><p>每个运行的程序都有一个页表</p>
+<ul>
+<li>属于程序运行状态，会动态变化</li>
+<li>PTBR：页表基址寄存器</li>
+</ul>
+<h4 id="页表项内容"><a href="#页表项内容" class="headerlink" title="页表项内容"></a>页表项内容</h4><p>标志位：</p>
+<ul>
+<li>dirty bit</li>
+<li>resident bit</li>
+<li>clock/reference bit</li>
+</ul>
+<p>帧号：r</p>
+<h4 id="分页机制的性能问题"><a href="#分页机制的性能问题" class="headerlink" title="分页机制的性能问题"></a>分页机制的性能问题</h4><p>问题：访问一个内存需要2次内存访问</p>
+<ul>
+<li>一次用于获取页表项</li>
+<li>一次用于访问数据</li>
+</ul>
+<p><a href="http://blog.csdn.net/chentravelling/article/details/41052995" target="_blank" rel="external">页面大小、页表项、虚拟地址和物理地址之间的关系</a></p>
+<p>页表可能非常大</p>
+<ul>
+<li>64位机器如果每页1024个字节，那么一个页表的大小会是多少？</li>
+<li>缓存</li>
+<li>间接访问</li>
+</ul>
+<h4 id="Translation-Look-side-Buffer-TLB"><a href="#Translation-Look-side-Buffer-TLB" class="headerlink" title="Translation Look-side Buffer(TLB)"></a>Translation Look-side Buffer(TLB)</h4><p>缓存近期访问的页帧转换表项</p>
+<ul>
+<li>TLB使用associative memory(关联内存)来实现，具备快速访问特性</li>
+<li>如果TLB命中，物理页号可以很快被获取</li>
+<li>如果TLB未命中，对应的表项被更新到TLB中</li>
+</ul>
+<h4 id="二级页表"><a href="#二级页表" class="headerlink" title="二级页表"></a>二级页表</h4><p>时间开销变大，空间开销变小，但是时间开销可以通过TLB来缓解</p>
+<h4 id="非连续内存分配"><a href="#非连续内存分配" class="headerlink" title="非连续内存分配"></a>非连续内存分配</h4><ul>
+<li>为什么需要非连续内存分配</li>
+<li>分段</li>
+<li>分页</li>
+<li>页表<br>　　　页表概览<br>　　　快表(TLB)<br>　　　二级/多级页表<br>　　　反向页表</li>
+</ul>
+<h4 id="大地址空间的问题"><a href="#大地址空间的问题" class="headerlink" title="大地址空间的问题"></a>大地址空间的问题</h4><p>有大地址空间(64-bits)，向前映射页表变得繁琐</p>
+<ul>
+<li>比如5级页表</li>
+</ul>
+<h4 id="不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应"><a href="#不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应" class="headerlink" title="不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应"></a>不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应</h4><ul>
+<li>逻辑(虚拟)地址空间增长速度快于物理地址空间</li>
+</ul>
+<h4 id="基于页寄存器-paging-register-的方案"><a href="#基于页寄存器-paging-register-的方案" class="headerlink" title="基于页寄存器(paging register)的方案"></a>基于页寄存器(paging register)的方案</h4><p>每个帧和一个寄存器关联，寄存器包括：<br>Residence bit：此帧是否被占用<br>Occupier： 对应的页号p<br>Protection bit：保护位</p>
+<h5 id="利："><a href="#利：" class="headerlink" title="利："></a>利：</h5><p>转换表的大小相对于物理内存来说很小<br>转换表的大小和逻辑地址的大小无关</p>
+<h5 id="弊："><a href="#弊：" class="headerlink" title="弊："></a>弊：</h5><p>需要的信息对调了，即根据帧号可找到页号<br>如何转换回来？即根据页号找帧号<br>在需要反向页表中搜索想要的页号</p>
+<h4 id="基于关联内存-association-memory-的方案"><a href="#基于关联内存-association-memory-的方案" class="headerlink" title="基于关联内存(association memory)的方案"></a>基于关联内存(association memory)的方案</h4><p>如果帧数较少，页寄存器可以放置在关联内存中<br>在关联内存中查找逻辑页号<br>　　　　成功：帧号被提取<br>　　　　失败：页错误异常(page fault)<br>限制因素：<br>大量的关联内存非常珍贵<br>　　　　难以在单个时钟    周期内完成<br>　　　　耗电</p>
+<p>基于哈希(Hash)查找的方案</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/22/操作系统-学习笔记-分页/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/22/操作系统-学习笔记-分页/" itemprop="url">操作系统-学习笔记-分页</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T22:05:06+08:00">
+                2017-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><p>划分物理内存至固定大小的帧</p>
+<ul>
+<li>大小是2的幂， e.g. 512，4096，8192</li>
+</ul>
+<p>划分逻辑地址空间至相同大小的页</p>
+<ul>
+<li>大小是2的幂，e.g. 512，4096，8192</li>
+</ul>
+<p>建立方案 转换逻辑地址为物理地址</p>
+<ul>
+<li>页表</li>
+<li>MMU/TLB</li>
+</ul>
+<h4 id="帧-Frame"><a href="#帧-Frame" class="headerlink" title="帧(Frame)"></a>帧(Frame)</h4><p>物理内存被分割为大小相等的帧</p>
+<h4 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h4><p>一个内存物理地址是一个二元组(f,o)<br>f - 帧号(F位 共有2^F个帧)<br>o - 帧内偏移(S位，每帧有2^S字节)</p>
+<p>物理地址= 2^S * f+o<br>例： 16-bit的地址空间，9-bit大小的页帧<br>则(3,6)的物理地址为？</p>
+<p>F= 7, S=9, f=3, o=6<br>addr= 2^9 * 3+6=1542</p>
+<h4 id="虚拟地址"><a href="#虚拟地址" class="headerlink" title="虚拟地址"></a>虚拟地址</h4><p>一个程序的逻辑地址空间被划分为大小相等的页</p>
+<ul>
+<li>页内偏移的大小 = 帧内偏移的大小</li>
+<li>页号大小 &lt;==&gt; 帧号大小</li>
+</ul>
+<p>一个逻辑地址是一个二元组(p, o)<br>p - 页号(p位，2^p个页)<br>o - 帧内偏移(S位，每帧有2^S字节)<br>虚拟地址 = 2^P * f+o</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/20/操作系统-学习笔记-非连续内存分配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -419,7 +1182,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -616,7 +1379,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -776,7 +1539,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -926,7 +1689,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1075,7 +1838,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1186,611 +1949,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/17/uml-学习笔记-UP过程和瀑布模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/uml-学习笔记-UP过程和瀑布模型/" itemprop="url">uml-学习笔记-UP过程和瀑布模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T16:19:15+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="什么是UP"><a href="#什么是UP" class="headerlink" title="什么是UP"></a>什么是UP</h4><ul>
-<li>软件开发过程(software development process)描述了构造、部署、以及维护软件的方式。统一过程(The Unified Software Development Process)是一种流行的构造面向对象系统的迭代软件开发过程。特别是，Rational统一过程(Rational Unified Process,RUP)是对统一过程的详细精化，并且已经被广泛采纳</li>
-</ul>
-<ul>
-<li>UP也可以引进其他方法中有用的实践，比如说极限编程(Extreme Programming,XP)。 XP中的测试驱动开发(test-driven development)、重构(refactoring) 和持续集成(continuous integration)等。</li>
-</ul>
-<p>UP特点</p>
-<ol>
-<li></li>
-<li>用例驱动</li>
-<li>迭代和增量式开发</li>
-</ol>
-<h4 id="什么是瀑布生命模型-？"><a href="#什么是瀑布生命模型-？" class="headerlink" title="什么是瀑布生命模型 ？"></a>什么是瀑布生命模型 ？</h4><ul>
-<li>瀑布模型（Waterfall Model） 是一个项目开发架构，开发过程是通过设计一系列阶段顺序展开的，从系统需求分析开始直到产品发布和维护，每个阶段都会产生循环反馈，因此，如果有信息未被覆盖或者发现了问题，那么最好 “返回”上一个阶段并进行适当的修改，项目开发进程从一个阶段“流动”到下一个阶段，这也是瀑布模型名称的由来。包括软件工程开发、企业项目开发、产品生产以及市场销售等构造瀑布模型。</li>
-</ul>
-<h4 id="瀑布模型优缺点"><a href="#瀑布模型优缺点" class="headerlink" title="瀑布模型优缺点"></a>瀑布模型优缺点</h4><h5 id="瀑布模型有以下优点"><a href="#瀑布模型有以下优点" class="headerlink" title="瀑布模型有以下优点"></a>瀑布模型有以下优点</h5><ol>
-<li>为项目提供了按阶段划分的检查点。</li>
-<li>当前一阶段完成后，您只需要去关注后续阶段。</li>
-<li>可在迭代模型中应用瀑布模型。<br>增量迭代应用于瀑布模型。迭代1解决最大的问题。每次迭代产生一个可运行的版本,同时增加更多的功能。每次迭代必须经过质量和集成测试。</li>
-<li>它提供了一个模板，这个模板使得分析、设计、编码、测试和支持的方法可以在该模板下有一个共同的指导。</li>
-</ol>
-<h5 id="瀑布模型有以下缺点"><a href="#瀑布模型有以下缺点" class="headerlink" title="瀑布模型有以下缺点"></a>瀑布模型有以下缺点</h5><ol>
-<li>各个阶段的划分完全固定，阶段之间产生大量的文档，极大地增加了工作量。</li>
-<li>由于开发模型是线性的，用户只有等到整个过程的末期才能见到开发成果，从而增加了开发风险。</li>
-<li>通过过多的强制完成日期和里程碑来跟踪各个项目阶段。</li>
-<li>瀑布模型的突出缺点是不适应用户需求的变化。</li>
-</ol>
-<h4 id="UML概述"><a href="#UML概述" class="headerlink" title="UML概述"></a>UML概述</h4><h5 id="uml-包括："><a href="#uml-包括：" class="headerlink" title="uml 包括："></a>uml 包括：</h5><p> 　　　　　1. 事物<br> 　　　　　2. 关系<br> 　　　　　3. 图<br> 　　　　　4. 扩展机制</p>
-<h5 id="事物"><a href="#事物" class="headerlink" title="事物"></a>事物</h5><p>　　　　1. 结构：类，接口，构件，节点(数据库节点，服务器节点，打印机)等等<br>　　　　2. 行为：交互(信息)、状态(通过状态图、活动图)等等<br>　　　　3. 分组：包，子系统(可以描述依赖关系)等等<br>　　　　4. 注释：注释(有时注释比画图更方便)</p>
-<h5 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h5><p>　　　　依赖，关联(聚合、组合)、泛化、实现</p>
-<h5 id="图-相当于选取一种角度来观察系统"><a href="#图-相当于选取一种角度来观察系统" class="headerlink" title="图 (相当于选取一种角度来观察系统)"></a>图 (相当于选取一种角度来观察系统)</h5><p>　　　　　用例图、交互图(顺序图、协作图)、类图、活动图、状态图等等</p>
-<ol>
-<li>用例图：用例图是指由参与者（Actor）、用例（Use Case），边界以及它们之间的关系构成的用于描述系统功能的视图。</li>
-</ol>
-<ul>
-<li>例： 从需求的角度分析，系统应该有添加用户、删除用户、查询用户等，而且这个用户管理功能只有系统管理员才能有，普通用户不能做，<br>so 这个系统管理员在这个系统里属于一个参与者，即描述一个功能需要从参与者的角度。</li>
-</ul>
-<ol>
-<li>交互图:描述对象之间的关系以及对象之间的信息传递的图。序列图（时序图）、协作图和通信图、交互概览图统称交互图。</li>
-</ol>
-<ul>
-<li>例： 系统管理员添加用户  (我要描述如何交互，这是文字版，可以用顺序图来实现法)</li>
-</ul>
-<ol>
-<li>系统管理员请求系统，打开添加用户的界面</li>
-<li>系统显示该界面</li>
-<li>管理员输入用户的相关信息，提交</li>
-<li><p>系统存储用户的信息，并向系统管理员返回“添加用户成功”的响应。</p>
-</li>
-<li><p>类图(Class diagram):显示了模型的静态结构，特别是模型中存在的类、类的内部结构以及它们与其他类的关系等。</p>
-</li>
-</ol>
-<ul>
-<li>例：描述人和部门是多对1的关系    ，画一个人，然后画一个部门，连线说明人和部门是多对一的关系</li>
-</ul>
-<ol>
-<li>活动图（activity diagram，动态图）:阐明了业务用例实现的工作流程。业务工作流程说明了业务为向所服务的业务主角提供其所需的价值而必须完成的工作。</li>
-</ol>
-<ul>
-<li>例： 登录这个过程</li>
-</ul>
-<ol>
-<li>打开登录界面，输入用户名和密码，点击登录。</li>
-<li>后台判断： 用户名不存在？返回登录界面：(密码不正确？返回登录界面：(用户状态不可用？返回登录界面：登录成功))</li>
-<li><p>进入系统管理员主界面</p>
-</li>
-<li><p>状态图(Statechart Diagram):描述一个实体基于事件反应的动态行为，显示了该实体如何根据当前所处的状态对不同的事件做出反应。<br>例：校园卡的状态：</p>
-</li>
-<li>正常状态</li>
-<li>冻结状态(通过挂失这个行为)</li>
-<li>回收状态(通过注销这个动作)<br>注意：正常状态不能直接进入回收吗，要通过注销去掉关联</li>
-</ol>
-<h5 id="拓展机制"><a href="#拓展机制" class="headerlink" title="拓展机制:"></a>拓展机制:</h5><p>　　　　　Stereotype(版型)、Tagged Value(标签值)、 Constraint(约束)<br>这有在特定的情景或环境才有用</p>
-<h4 id="图的分类"><a href="#图的分类" class="headerlink" title="图的分类"></a>图的分类</h4><h5 id="静态建模"><a href="#静态建模" class="headerlink" title="静态建模"></a>静态建模</h5><ul>
-<li>类图</li>
-</ul>
-<h5 id="动态建模"><a href="#动态建模" class="headerlink" title="动态建模"></a>动态建模</h5><ul>
-<li>顺序图</li>
-<li>用例图</li>
-<li>活动图</li>
-<li>状态图</li>
-</ul>
-<h4 id="学习的顺序："><a href="#学习的顺序：" class="headerlink" title="学习的顺序："></a>学习的顺序：</h4><ul>
-<li>从最重要的部分开始！</li>
-<li>类图 -&gt; 顺序图 -&gt; 用例图 -&gt; 活动图 -&gt; 状态图</li>
-</ul>
-<p><img src="/images/yonglitu.png" alt="几种图"></p>
-<h4 id="Rational-Rose-是一种建模工具"><a href="#Rational-Rose-是一种建模工具" class="headerlink" title="Rational Rose 是一种建模工具"></a>Rational Rose 是一种建模工具</h4><ul>
-<li><p>用例视图：需求分析阶段的利器</p>
-</li>
-<li><p>逻辑视图：设计阶段，用例的实现</p>
-</li>
-<li><p>组件视图：构建表示封装了其内容的系统模块；构件是相对独立的模块</p>
-</li>
-<li><p>部署视图：表示软件元素在物理架构上的部署，以及物理元素之间的通信</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/17/学习计划-10-17/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/学习计划-10-17/" itemprop="url">学习计划_10/17</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T15:46:02+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前三门是必修，肯定优先级更高</p>
-<h4 id="ambition："><a href="#ambition：" class="headerlink" title="ambition："></a>ambition：</h4><h5 id="uml-：10"><a href="#uml-：10" class="headerlink" title="uml ：10"></a>uml ：10</h5><h5 id="编译原理-：词法分析器-c"><a href="#编译原理-：词法分析器-c" class="headerlink" title="编译原理 ：词法分析器(c)"></a>编译原理 ：词法分析器(c)</h5><h5 id="操作系统-10"><a href="#操作系统-10" class="headerlink" title="操作系统: 10"></a>操作系统: 10</h5><h5 id="omnet-：生成网络拓扑图"><a href="#omnet-：生成网络拓扑图" class="headerlink" title="omnet++ ：生成网络拓扑图"></a>omnet++ ：生成网络拓扑图</h5>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/17/uml-学习笔记-OOA-D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/uml-学习笔记-OOA-D/" itemprop="url">uml-学习笔记-OOA/D</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T13:06:49+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>uml只是一种图形表示法，重要的还是OOA/D</p>
-<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>分析(analysis)：对问题和需求的调查研究<br>设计(design)：满足需求的概念上的解决方案</p>
-<p>面向对象分析（OOA）：在问题领域内发现和描述对象<br>面向对象设计（OOD）：如何定义软件对象及它们之间如何协作以实现需求</p>
-<h4 id="软件建模"><a href="#软件建模" class="headerlink" title="软件建模"></a>软件建模</h4><p>静态： 各模块的部署，都有哪些东西，什么概念<br>动态： 各模块的交互，<br>工具：rational rose</p>
-<h4 id="骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输"><a href="#骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输" class="headerlink" title="骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输"></a>骰子游戏：软件模拟游戏者投掷两个骰子，如果总点数是7则赢得游戏，否则为输</h4><p>过程： 定义用例 -&gt;  定义领域模型 -&gt; 定义交互图 -&gt;  定义设计类图(静态建模)</p>
-<p>定义用例(用例是需求分析的一种工具，它是一些情节的描述)</p>
-<ul>
-<li>骰子游戏</li>
-</ul>
-<ol>
-<li>游戏者请求骰子</li>
-<li>系统展示结果：如果骰子的总点数是7，则游戏者赢，否则游戏者输</li>
-</ol>
-<p>定义领域模型(OOA)：识别问题中的概念，它是对真实世界领域中的概念和想象可视化，与具体实现的软件技术无关(比如说java或c#)</p>
-<ul>
-<li>游戏者</li>
-<li>骰子</li>
-<li>骰子游戏</li>
-</ul>
-<h4 id="应用uml的三种方式："><a href="#应用uml的三种方式：" class="headerlink" title="应用uml的三种方式："></a>应用uml的三种方式：</h4><ol>
-<li>草图()</li>
-<li>蓝图(指导开发，不必特别细或为了以后维护)</li>
-<li>编程语言</li>
-</ol>
-<p>MDA(模型驱动体系架构)</p>
-<h4 id="学习uml的要素："><a href="#学习uml的要素：" class="headerlink" title="学习uml的要素："></a>学习uml的要素：</h4><ol>
-<li>表示法 - 图形   [重点]</li>
-<li>过程 - (uml与过程无关，但最好用于RUP) [了解]</li>
-<li>工具 - (比如： Rational Rose)  [了解]</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/17/uml-学习笔记-学习大纲/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/uml-学习笔记-学习大纲/" itemprop="url">uml-学习笔记-学习大纲</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T12:54:19+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>uml学习，重要的是OOAD，或者说是想法，而不是uml本身，要多想为什么这样更好，那样不太好，<strong>多写多想。</strong></p>
-<h4 id="学习目录"><a href="#学习目录" class="headerlink" title="学习目录"></a>学习目录</h4><h5 id="1-面向对象分析和设计-OOA-D"><a href="#1-面向对象分析和设计-OOA-D" class="headerlink" title="1.面向对象分析和设计 (OOA/D)"></a>1.面向对象分析和设计 (OOA/D)</h5><h5 id="2-UP过程和瀑布模型"><a href="#2-UP过程和瀑布模型" class="headerlink" title="2.UP过程和瀑布模型"></a>2.UP过程和瀑布模型</h5><h5 id="3-UML概述"><a href="#3-UML概述" class="headerlink" title="3.UML概述"></a>3.UML概述</h5><h5 id="4-需求分析"><a href="#4-需求分析" class="headerlink" title="4.需求分析"></a>4.需求分析</h5><h5 id="5-类图"><a href="#5-类图" class="headerlink" title="5.类图"></a>5.类图</h5><h5 id="6-领域模型"><a href="#6-领域模型" class="headerlink" title="6.领域模型"></a>6.领域模型</h5><h5 id="7-交互图"><a href="#7-交互图" class="headerlink" title="7.交互图"></a>7.交互图</h5><h5 id="8-uml活动图"><a href="#8-uml活动图" class="headerlink" title="8.uml活动图"></a>8.uml活动图</h5><h5 id="9-uml状态图"><a href="#9-uml状态图" class="headerlink" title="9.uml状态图"></a>9.uml状态图</h5><h5 id="10-GRASP与GOF（设计模型）"><a href="#10-GRASP与GOF（设计模型）" class="headerlink" title="10.GRASP与GOF（设计模型）"></a>10.GRASP与GOF（设计模型）</h5>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1831,7 +1989,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
+                src="/images/avatar.png"
                 alt="枳ukiyoe" />
             
               <p class="site-author-name" itemprop="name">枳ukiyoe</p>
@@ -1845,7 +2003,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="OS," />
 
 
 
@@ -79,13 +79,37 @@
 
 
 
+<meta name="description" content="Belayd现象：在采用FIFO算法时，有时会出现分配的物理页面数增加，缺页率反而提高的异常现象
+FIFO：FIFO算法的置换特征与进程访问内存的动态特征是矛盾的，与置换算法的目标是不一致的（即替换较少使用的页面），因此，被它置换出去的页面并不一定是    进程不会访问的。
+FIFO算法的Belayd现象frame size=3
+frame size=4
+LRU算法的Belayd现象
+LRU符合栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统-学习笔记-二级机会法">
-<meta property="og:url" content="gensokyoukiyoe.github.io/2017/10/26/操作系统-学习笔记-二级机会法/index.html">
+<meta property="og:title" content="操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较">
+<meta property="og:url" content="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较/index.html">
 <meta property="og:site_name" content="枳ukiyoe's blog">
-<meta property="og:updated_time" content="2017-10-26T07:46:31.726Z">
+<meta property="og:description" content="Belayd现象：在采用FIFO算法时，有时会出现分配的物理页面数增加，缺页率反而提高的异常现象
+FIFO：FIFO算法的置换特征与进程访问内存的动态特征是矛盾的，与置换算法的目标是不一致的（即替换较少使用的页面），因此，被它置换出去的页面并不一定是    进程不会访问的。
+FIFO算法的Belayd现象frame size=3
+frame size=4
+LRU算法的Belayd现象
+LRU符合栈">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p1.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p2.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p3.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p4.png">
+<meta property="og:updated_time" content="2017-10-30T07:15:07.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="操作系统-学习笔记-二级机会法">
+<meta name="twitter:title" content="操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较">
+<meta name="twitter:description" content="Belayd现象：在采用FIFO算法时，有时会出现分配的物理页面数增加，缺页率反而提高的异常现象
+FIFO：FIFO算法的置换特征与进程访问内存的动态特征是矛盾的，与置换算法的目标是不一致的（即替换较少使用的页面），因此，被它置换出去的页面并不一定是    进程不会访问的。
+FIFO算法的Belayd现象frame size=3
+frame size=4
+LRU算法的Belayd现象
+LRU符合栈">
+<meta name="twitter:image" content="gensokyoukiyoe.github.io/./p.png">
 
 
 
@@ -115,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="gensokyoukiyoe.github.io/2017/10/26/操作系统-学习笔记-二级机会法/"/>
+  <link rel="canonical" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较/"/>
 
 
 
 
 
-  <title>操作系统-学习笔记-二级机会法 | 枳ukiyoe's blog</title>
+  <title>操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较 | 枳ukiyoe's blog</title>
   
 
 
@@ -186,6 +210,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -228,12 +282,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/26/操作系统-学习笔记-二级机会法/">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -245,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">操作系统-学习笔记-二级机会法</h1>
+          <h1 class="post-title" itemprop="name headline">操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较</h1>
         
 
         <div class="post-meta">
@@ -257,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T15:46:31+08:00">
-                2017-10-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T11:45:35+08:00">
+                2017-10-30
               </time>
             
 
@@ -267,6 +321,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -295,7 +371,16 @@
       
 
       
-        
+        <p><strong>Belayd现象</strong>：在采用FIFO算法时，有时会出现分配的物理页面数增加，缺页率反而提高的异常现象</p>
+<p><strong>FIFO</strong>：FIFO算法的置换特征与进程访问内存的动态特征是矛盾的，与置换算法的目标是不一致的（即替换较少使用的页面），因此，被它置换出去的页面并不一定是    进程不会访问的。</p>
+<p><strong>FIFO算法的Belayd现象</strong><br>frame size=3<br><img src="./p.png" alt="p"></p>
+<p>frame size=4<br><img src="./p1.png" alt="p1"></p>
+<p><strong>LRU算法的Belayd现象</strong><br><img src="./p2.png" alt="p2"></p>
+<p>LRU符合栈算法的特点，FIFO不符合</p>
+<p><strong>LRU、FIFO和Clock的比较</strong></p>
+<p><img src="./p3.png" alt="p3"></p>
+<p><img src="./p4.png" alt="p4"></p>
+
       
     </div>
     
@@ -310,6 +395,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+        </div>
+      
 
       
       
@@ -319,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/26/电子烟/" rel="next" title="电子烟">
-                <i class="fa fa-chevron-left"></i> 电子烟
+              <a href="/2017/10/30/操作系统-学习笔记-最不常用法/" rel="next" title="操作系统-学习笔记-最不常用法">
+                <i class="fa fa-chevron-left"></i> 操作系统-学习笔记-最不常用法
               </a>
             
           </div>
@@ -328,6 +419,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/30/操作系统-学习笔记-局部页替换算法/" rel="prev" title="操作系统-学习笔记-局部页替换算法">
+                操作系统-学习笔记-局部页替换算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -385,7 +480,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
+                src="/images/avatar.png"
                 alt="枳ukiyoe" />
             
               <p class="site-author-name" itemprop="name">枳ukiyoe</p>
@@ -399,7 +494,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

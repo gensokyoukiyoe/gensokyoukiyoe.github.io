@@ -186,6 +186,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -228,12 +258,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/26/操作系统-学习笔记-二级机会法/">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-两个全局置换算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -247,7 +277,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/26/操作系统-学习笔记-二级机会法/" itemprop="url">操作系统-学习笔记-二级机会法</a></h1>
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-两个全局置换算法/" itemprop="url">操作系统-学习笔记-两个全局置换算法</a></h1>
         
 
         <div class="post-meta">
@@ -259,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T15:46:31+08:00">
-                2017-10-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T19:58:08+08:00">
+                2017-10-30
               </time>
             
 
@@ -269,6 +299,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -299,7 +351,639 @@
       
         
           
+            <p><strong>工作集页面置换算法</strong></p>
+<p><img src="./p.png" alt="p"></p>
+<p><strong>缺页率页面置换算法</strong></p>
+<p>可变分配策略：常驻集大小可变。例如：每个进程在刚开始运行的时候，先根据程序大小给它分配一定数目的物理页面，然后在进程运行过程中，再动态地调整常驻集的大小。</p>
+<ul>
+<li><p>可采用全局页面置换的方式，当发生一个缺页中断时，被置换的页面可以是在其他进程当中，各个并发进程竞争地使用物理页面。</p>
+</li>
+<li><p>优缺点： 性能较好，但增加了系统开销。</p>
+</li>
+<li><p>具体实现：可以使用缺页率算法（PFF，page fault frequency）来动态调整常驻集的大小。</p>
+</li>
+</ul>
+<p><strong> 缺页率 </strong></p>
+<p>缺页率表示“缺页次数/内存访问次数 ”（比率）或“缺页的平均时间间隔的倒数”。</p>
+<p>影响缺页率的因素：</p>
+<ul>
+<li>页面置换算法</li>
+<li>分配给进程的物理页面数目 </li>
+<li>页面本身的大小</li>
+<li>程序的编写方法 （程序的局部性）</li>
+</ul>
+<p><img src="./p1.png" alt="p1"></p>
+<p>一个交替的工作集计算明确的试图最小化页缺失</p>
+<ul>
+<li>当缺页率高的时候 - 增加工作集</li>
+<li>当缺页率低的时候 - 减少工作集</li>
+</ul>
+<p>算法：<br><img src="./p2.png" alt="p2"></p>
+<p>例子：<br><img src="./p3.png" alt="p3"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-局部页替换算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-局部页替换算法/" itemprop="url">操作系统-学习笔记-局部页替换算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T15:43:59+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>工作集原理</strong><br>前面介绍的各种页面置换算法，都是基于一个前提，即程序的局部性原理。但是此原理是否成立？</p>
+<p>如果局部性原理不成立，那么各种页面置换算法就没有什么区别，也没有什么意义。例如：假设进程对逻辑页面的访问顺序是1,2,3,4,5,6,7,8,9 …即单调递增，那么在物理页面数有限的前提下，不管采用何种置换算法，每次的页面访问都必然导致缺页中断。</p>
+<p>如果局部性原理是成立的，那么如何来证明它的存在？如何来对它进行定量的分析？这就是工作集模型</p>
+<p><img src="./p.png" alt="p"></p>
+<p>工作集大小的变化：进程开始执行之后，随着访问新页面逐步建立较稳定的工作集。当内存访问的局部性区域的位置大致稳定时，工作集大小也大致稳定；<br>局部性区域的位置改变时，工作集快速扩张和收缩过渡到下一个稳定值。</p>
+<p><img src="./p1.png" alt="p1"></p>
+<p><strong>常驻集</strong></p>
+<p>常驻集是指在当前时刻，进程实际驻留在内存中的页面集合。</p>
+<ul>
+<li><p>工作集是进程运行过程中固有的属性，而常驻集取决于系统分配给进程的物理页面数目，以及所采用的页面置换算法</p>
+</li>
+<li><p>如果一个进程的整个工作集都在内存中，即工作集属于或等于常驻集，那么进程将很顺利的运行，而不会造成太多的缺页中断（直到工作集发生剧烈变动，从而过渡到另一个状态）</p>
+</li>
+<li><p>当进程常驻集的大小达到某个数目之后，再给它分配更多的物理页面，缺页率也不会明显下降</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较/" itemprop="url">操作系统-学习笔记-Belayd现象、LRU、FIFO、Clock的比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T11:45:35+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>Belayd现象</strong>：在采用FIFO算法时，有时会出现分配的物理页面数增加，缺页率反而提高的异常现象</p>
+<p><strong>FIFO</strong>：FIFO算法的置换特征与进程访问内存的动态特征是矛盾的，与置换算法的目标是不一致的（即替换较少使用的页面），因此，被它置换出去的页面并不一定是    进程不会访问的。</p>
+<p><strong>FIFO算法的Belayd现象</strong><br>frame size=3<br><img src="./p.png" alt="p"></p>
+<p>frame size=4<br><img src="./p1.png" alt="p1"></p>
+<p><strong>LRU算法的Belayd现象</strong><br><img src="./p2.png" alt="p2"></p>
+<p>LRU符合栈算法的特点，FIFO不符合</p>
+<p><strong>LRU、FIFO和Clock的比较</strong></p>
+<p><img src="./p3.png" alt="p3"></p>
+<p><img src="./p4.png" alt="p4"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-最不常用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-最不常用法/" itemprop="url">操作系统-学习笔记-最不常用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T11:27:59+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="最不常用算法-Least-Frequently-Used-LFU"><a href="#最不常用算法-Least-Frequently-Used-LFU" class="headerlink" title="最不常用算法(Least Frequently Used,LFU)"></a>最不常用算法(Least Frequently Used,LFU)</h4><p><strong>基本思路</strong>： 当一个缺页中断发生时，选择访问次数最少的那个页面，并淘汰之</p>
+<p><strong>实现方法</strong>：对每个页面设置一个访问计数器，每当一个页面被访问时，该页面的访问器加1。在发生缺页中断时，淘汰计数数值最小的那个页面</p>
+<p><strong>LRU和LFU的区别</strong>： LRU考察的是多久未访问，时间越短越好；而LFU考察的是访问的次数或频度，访问次数越多越好。</p>
+<p><strong>问题</strong>：一个页面在进程开始阶段使用很多，但以后就不使用了。实现也费时费力</p>
+<p><strong>解决办法</strong>： 定期把次数寄存器右移一位</p>
+<p><img src="./p.png" alt="p"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-二次机会法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-二次机会法/" itemprop="url">操作系统-学习笔记-二次机会法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T11:16:59+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这里有一个巨大的代价来替换“脏”页</p>
+<p>修改clock算法，使它允许脏页总是在一次时钟头扫描中保留下来</p>
+<p>dirty-bit 一个页被写过，置为1；被读，置为0</p>
+<p><strong>写操作</strong><br>access-bit = 1<br>dirty-bit = 1<br>内存中的内容与硬盘中的内容不一致，需要写入到硬盘中</p>
+<p><strong>读操作</strong><br>access-bit = 1<br>dirty-bit = 0<br>内存中的内容与硬盘中的内容一致，不需要写入到硬盘中</p>
+<p><strong>把access-bit和dirty-bit都用上，减少写操作的次数</strong></p>
+<p><img src="./p1.png" alt="p1"></p>
+<p>例子：<br><img src="./p2.png" alt="p1"></p>
+
           
         
       
@@ -352,7 +1036,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -511,7 +1195,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -659,7 +1343,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -810,7 +1494,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -954,7 +1638,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枳ukiyoe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1085,739 +1769,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/23/操作系统-学习笔记-虚拟内存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/23/操作系统-学习笔记-虚拟内存/" itemprop="url">操作系统-学习笔记-虚拟内存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T22:37:42+08:00">
-                2017-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>起因<br>覆盖技术<br>交换技术<br>虚存技术</p>
-<ul>
-<li>目标</li>
-<li>程序局部性原理</li>
-<li>基本概念</li>
-<li>基本特征</li>
-<li>虚拟页式内存管理</li>
-</ul>
-<p>理想中的存储器：<br>更大、更快、更便宜的非易失性存储器</p>
-<p>在计算机系统中，尤其是在多道程序运行的环境下，可能会出现内存不够的情况，怎么办？</p>
-<ul>
-<li>如果是程序太大，超过了内存的容量可以采用手动的覆盖(overlay)技术，只把需要的指令和数据保存在内存当中</li>
-<li>如果是程序太多，超过了内存的容量，可以采用自动的交换(swapping)技术，把暂时不能执行的程序送到外存中</li>
-<li>如果想要在有限容量的内存中，以更小的页粒度为单位装入更多更大的程序，可以采用自动的虚拟存储技术</li>
-</ul>
-<h4 id="覆盖技术"><a href="#覆盖技术" class="headerlink" title="覆盖技术"></a>覆盖技术</h4><p>目标：<br>是在较小的可用内存中运行较大的程序。常用于多道程序系统，与分区存储管理配合使用</p>
-<p>原理：<br>把程序按照其自身逻辑结构，划分为若干个功能上相对独立的程序模块，那些不会同时执行的模块共享同一块内存区域，按时间先后来运行。</p>
-<ul>
-<li>必要部分(常用功能)的代码和数据常驻内存</li>
-<li>可选部分(不常用功能)在其他程序模块中实现，平时存放在外存中，需要时才放到内存</li>
-<li>不存在调用关系的模块不必同时装入到内存，从而可以相互覆盖，即这些模块共用一个分区</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>由程序员来把一个大的程序划分为若干个小的功能模块，并确定各个模块之间的覆盖关系，费时费力，增长了编程的复杂度</li>
-<li>覆盖模块由外存装入内存，实际上是以时间延长来换取空间节省</li>
-</ul>
-<h4 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h4><p>目标:</p>
-<ul>
-<li><p>多道程序在内存中时，让正在运行的程序或需要运行的程序获得更多的内存资源</p>
-</li>
-<li><p>方法：<br>可将暂时不能运行的程序送到外存，从而获得空闲内存空间</p>
-</li>
-</ul>
-<p>操作系统把一个进程的整个地址空间的内容保存到外存中(换出swap out)，而将外存的某个进程的地址空间读入到内存(swap in). 换入换出内容的大小为整个程序的地址空间</p>
-<p>交换技术实现中的几个问题</p>
-<ul>
-<li>交换时机的确定：何时需要发生交换？只当内存空间不够或有不够的危险时换出；</li>
-<li>交换区的大小：必须足够大以存放所有用户进程的所有内存映射的拷贝，必须能对这些内存映像进行直接存取</li>
-<li>程序换入时的重定位：换出后再换入的内存位置一定要在原来的位置上吗？最好采用动态地址映射的方法</li>
-</ul>
-<h4 id="覆盖和交换的比较"><a href="#覆盖和交换的比较" class="headerlink" title="覆盖和交换的比较"></a>覆盖和交换的比较</h4><ul>
-<li>覆盖只能发生在那些相互之间没有调用关系的程序模块之间，因此程序员必须给出程序内的各个模块之间的逻辑覆盖结构。</li>
-<li>交换技术是以内存中的程序大小为单位进行的，他不需要程序员给出程序内的各个模块之间的逻辑覆盖结构。<br>换言之，交换发生在内存中程序与管理程序或操作系统之间，而覆盖发生在运行程序的内部</li>
-</ul>
-<h4 id="虚存技术–目标"><a href="#虚存技术–目标" class="headerlink" title="虚存技术–目标"></a>虚存技术–目标</h4><p>在内存不够用的情形下，可以采用覆盖技术和交换技术，但是</p>
-<ul>
-<li>覆盖技术：需要程序员自己把整个程序划分为若干个小的功能模块，并确定各个模块之间的覆盖关系，增加程序员的负担</li>
-<li>交换技术：以进程作为交换的单位，需要把进程的整个地址空间都换出换入，增大了处理器的开销</li>
-</ul>
-<p>目标<br>像覆盖技术那样，不是把程序的所有内容都放入内存中，因而能够运行比当前的空闲内存空间还要大的程序。但做的更好，又操作系统自己来完成，无须程序员的干涉</p>
-<p>像交换技术那样，能够实现进程在内存和外存之间的交换，因而获得更多的空闲内存空间。但做得更好，只对进程的部分内容在内存和外存之间交换。</p>
-<h4 id="虚存技术–程序的局部性原理"><a href="#虚存技术–程序的局部性原理" class="headerlink" title="虚存技术–程序的局部性原理"></a>虚存技术–程序的局部性原理</h4><ul>
-<li>程序的局部性原理(principle of locality):指程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限在一定的区域<br>–时间局部性：一条指令的一次执行和下次执行，一个数据的一次访问和下次访问都集中在一个较短时期内；<br>–空间局部性：当前指令和邻近的几条指令，当前访问的数据和邻近的几个数据都集中在一个较小的区域。</li>
-</ul>
-<p>程序的局部性原理表明，从理论上来讲，虚存技术是能够实现的，而且在实现了以后应该是能够取得一个满意的效果</p>
-<h4 id="虚存技术–基本概念"><a href="#虚存技术–基本概念" class="headerlink" title="虚存技术–基本概念"></a>虚存技术–基本概念</h4><p>可以在页式或段式内存管理的基础上实现</p>
-<ul>
-<li><p>在装入程序时，不必将其全部装入到内存，而只需将当前需要执行的部分页面或段装入到内存，就可以让程序开始执行</p>
-</li>
-<li><p>在程序执行过程中，如果需执行的指令或访问的数据尚未在内存(称为缺页或缺段)，则由处理器通知操作系统将相应的页面或段调入到内存，然后继续执行程序</p>
-</li>
-<li><p>另一方面，操作系统将内存中暂时不使用的页面或段调出保存在外存上，从而腾出更多空闲空间存放将要装入的程序以及将要调入的页面或段</p>
-</li>
-</ul>
-<h4 id="虚存技术–基本特征"><a href="#虚存技术–基本特征" class="headerlink" title="虚存技术–基本特征"></a>虚存技术–基本特征</h4><p>大的用户空间：通过把物理内存与外存相结合，提供给用户的虚拟内存空间通常大于实际的物理内存，即实现了这两者的分离。如32位的虚拟地址理论上可以访问4GB，而可能计算机上仅有256M的物理内存，但硬盘容量大于4GB。</p>
-<p>部分交换：与交换技术相比较，虚拟存储的调入与调出是对部分虚拟地址空间进行的</p>
-<p>不连续性：物理内存分配的不连续，虚拟地址空间使用的不连续</p>
-<h4 id="虚存技术–虚拟页式内存管理"><a href="#虚存技术–虚拟页式内存管理" class="headerlink" title="虚存技术–虚拟页式内存管理"></a>虚存技术–虚拟页式内存管理</h4><p>大部分虚拟存储系统都是采用虚拟页式存储管理技术，即在页式存储管理的基础上，增加请求调页和页面置换功能</p>
-<p>基本思路：<br>当一个用户程序需要调入内存运行时，不是将该程序的所有页面都装入内存，而是只装入部分的页面，就可启动程序运行<br>在运行的过程中，如果发现要运行的程序或要访问的数据不在内存，则向系统发出缺页中断请求，系统在处理这个中断时，将外存中相应的页面调入内存，使得该程序能够继续运行</p>
-<h4 id="后备存储-backing-Store"><a href="#后备存储-backing-Store" class="headerlink" title="后备存储(backing Store)"></a>后备存储(backing Store)</h4><p>在何处保存未被映射的页？</p>
-<ul>
-<li>能够简单地识别在二级存储器中的页</li>
-<li>交换空间(磁盘或者文件)：特殊格式，用于存储未被映射的页面</li>
-</ul>
-<p>概念：后备存储</p>
-<ul>
-<li>一个虚拟地址空间的页面可以被映射到一个文件(在二级存储中)中的某个位置</li>
-<li>代码段：映射到可执行二进制文件</li>
-<li>动态加载的共享库程序段：映射到动态调用的库文件</li>
-<li>其他段：可能被映射到交换文件(swap file)</li>
-</ul>
-<h4 id="虚拟内存性能"><a href="#虚拟内存性能" class="headerlink" title="虚拟内存性能"></a>虚拟内存性能</h4><p>为了便于理解分页的开销，使用有效存储器访问时间effective memory access time(EAT)</p>
-<ul>
-<li>EAT = 访存时间 <em> 页表命中率+page fault处理时间 </em> page fault 几率</li>
-</ul>
-<p>例子：<br>访存时间：10ns<br>磁盘访问时间：5ms<br>参数p=page fault几率<br>参数q=dirty page几率</p>
-<p>EAT =10(1-p) + 5,000,000p(1+q)</p>
-<p>EAT 主要取决于p</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/23/uml-学习笔记-RationalRose使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/23/uml-学习笔记-RationalRose使用/" itemprop="url">uml-学习笔记-RationalRose使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T13:25:41+08:00">
-                2017-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/uml/" itemprop="url" rel="index">
-                    <span itemprop="name">uml</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>创建一个类图<br><img src="./p1.png" height="600" width="800"></p>
-<p>创建一个接口<br><img src="./p2.png" height="600" width="800"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/22/操作系统-学习笔记-页表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/22/操作系统-学习笔记-页表/" itemprop="url">操作系统-学习笔记-页表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T23:21:35+08:00">
-                2017-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="页表概述"><a href="#页表概述" class="headerlink" title="页表概述"></a>页表概述</h4><ul>
-<li>页表概念</li>
-<li>转换后备缓冲区(TLB)</li>
-<li>二级/多级 页表</li>
-<li>反向页表</li>
-</ul>
-<h4 id="页表结构"><a href="#页表结构" class="headerlink" title="页表结构"></a>页表结构</h4><p>每个运行的程序都有一个页表</p>
-<ul>
-<li>属于程序运行状态，会动态变化</li>
-<li>PTBR：页表基址寄存器</li>
-</ul>
-<h4 id="页表项内容"><a href="#页表项内容" class="headerlink" title="页表项内容"></a>页表项内容</h4><p>标志位：</p>
-<ul>
-<li>dirty bit</li>
-<li>resident bit</li>
-<li>clock/reference bit</li>
-</ul>
-<p>帧号：r</p>
-<h4 id="分页机制的性能问题"><a href="#分页机制的性能问题" class="headerlink" title="分页机制的性能问题"></a>分页机制的性能问题</h4><p>问题：访问一个内存需要2次内存访问</p>
-<ul>
-<li>一次用于获取页表项</li>
-<li>一次用于访问数据</li>
-</ul>
-<p><a href="http://blog.csdn.net/chentravelling/article/details/41052995" target="_blank" rel="external">页面大小、页表项、虚拟地址和物理地址之间的关系</a></p>
-<p>页表可能非常大</p>
-<ul>
-<li>64位机器如果每页1024个字节，那么一个页表的大小会是多少？</li>
-<li>缓存</li>
-<li>间接访问</li>
-</ul>
-<h4 id="Translation-Look-side-Buffer-TLB"><a href="#Translation-Look-side-Buffer-TLB" class="headerlink" title="Translation Look-side Buffer(TLB)"></a>Translation Look-side Buffer(TLB)</h4><p>缓存近期访问的页帧转换表项</p>
-<ul>
-<li>TLB使用associative memory(关联内存)来实现，具备快速访问特性</li>
-<li>如果TLB命中，物理页号可以很快被获取</li>
-<li>如果TLB未命中，对应的表项被更新到TLB中</li>
-</ul>
-<h4 id="二级页表"><a href="#二级页表" class="headerlink" title="二级页表"></a>二级页表</h4><p>时间开销变大，空间开销变小，但是时间开销可以通过TLB来缓解</p>
-<h4 id="非连续内存分配"><a href="#非连续内存分配" class="headerlink" title="非连续内存分配"></a>非连续内存分配</h4><ul>
-<li>为什么需要非连续内存分配</li>
-<li>分段</li>
-<li>分页</li>
-<li>页表<br>　　　页表概览<br>　　　快表(TLB)<br>　　　二级/多级页表<br>　　　反向页表</li>
-</ul>
-<h4 id="大地址空间的问题"><a href="#大地址空间的问题" class="headerlink" title="大地址空间的问题"></a>大地址空间的问题</h4><p>有大地址空间(64-bits)，向前映射页表变得繁琐</p>
-<ul>
-<li>比如5级页表</li>
-</ul>
-<h4 id="不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应"><a href="#不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应" class="headerlink" title="不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应"></a>不是让页表与逻辑地址空间的大小相对应，而是让页表与物理地址空间相对应</h4><ul>
-<li>逻辑(虚拟)地址空间增长速度快于物理地址空间</li>
-</ul>
-<h4 id="基于页寄存器-paging-register-的方案"><a href="#基于页寄存器-paging-register-的方案" class="headerlink" title="基于页寄存器(paging register)的方案"></a>基于页寄存器(paging register)的方案</h4><p>每个帧和一个寄存器关联，寄存器包括：<br>Residence bit：此帧是否被占用<br>Occupier： 对应的页号p<br>Protection bit：保护位</p>
-<h5 id="利："><a href="#利：" class="headerlink" title="利："></a>利：</h5><p>转换表的大小相对于物理内存来说很小<br>转换表的大小和逻辑地址的大小无关</p>
-<h5 id="弊："><a href="#弊：" class="headerlink" title="弊："></a>弊：</h5><p>需要的信息对调了，即根据帧号可找到页号<br>如何转换回来？即根据页号找帧号<br>在需要反向页表中搜索想要的页号</p>
-<h4 id="基于关联内存-association-memory-的方案"><a href="#基于关联内存-association-memory-的方案" class="headerlink" title="基于关联内存(association memory)的方案"></a>基于关联内存(association memory)的方案</h4><p>如果帧数较少，页寄存器可以放置在关联内存中<br>在关联内存中查找逻辑页号<br>　　　　成功：帧号被提取<br>　　　　失败：页错误异常(page fault)<br>限制因素：<br>大量的关联内存非常珍贵<br>　　　　难以在单个时钟    周期内完成<br>　　　　耗电</p>
-<p>基于哈希(Hash)查找的方案</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/22/操作系统-学习笔记-分页/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/22/操作系统-学习笔记-分页/" itemprop="url">操作系统-学习笔记-分页</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T22:05:06+08:00">
-                2017-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><p>划分物理内存至固定大小的帧</p>
-<ul>
-<li>大小是2的幂， e.g. 512，4096，8192</li>
-</ul>
-<p>划分逻辑地址空间至相同大小的页</p>
-<ul>
-<li>大小是2的幂，e.g. 512，4096，8192</li>
-</ul>
-<p>建立方案 转换逻辑地址为物理地址</p>
-<ul>
-<li>页表</li>
-<li>MMU/TLB</li>
-</ul>
-<h4 id="帧-Frame"><a href="#帧-Frame" class="headerlink" title="帧(Frame)"></a>帧(Frame)</h4><p>物理内存被分割为大小相等的帧</p>
-<h4 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h4><p>一个内存物理地址是一个二元组(f,o)<br>f - 帧号(F位 共有2^F个帧)<br>o - 帧内偏移(S位，每帧有2^S字节)</p>
-<p>物理地址= 2^S * f+o<br>例： 16-bit的地址空间，9-bit大小的页帧<br>则(3,6)的物理地址为？</p>
-<p>F= 7, S=9, f=3, o=6<br>addr= 2^9 * 3+6=1542</p>
-<h4 id="虚拟地址"><a href="#虚拟地址" class="headerlink" title="虚拟地址"></a>虚拟地址</h4><p>一个程序的逻辑地址空间被划分为大小相等的页</p>
-<ul>
-<li>页内偏移的大小 = 帧内偏移的大小</li>
-<li>页号大小 &lt;==&gt; 帧号大小</li>
-</ul>
-<p>一个逻辑地址是一个二元组(p, o)<br>p - 页号(p位，2^p个页)<br>o - 帧内偏移(S位，每帧有2^S字节)<br>虚拟地址 = 2^P * f+o</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1858,7 +1809,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
+                src="/images/avatar.png"
                 alt="枳ukiyoe" />
             
               <p class="site-author-name" itemprop="name">枳ukiyoe</p>
@@ -1872,7 +1823,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
