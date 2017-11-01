@@ -258,6 +258,434 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/" itemprop="url">操作系统-学习笔记-计算机体系结构及内存分层体系</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T13:04:33+08:00">
+                2017-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>计算机体系结构/内存分层结构</p>
+<p>地址空间 &amp; 地址生成</p>
+<p>连续地址分配</p>
+<h4 id="计算机体系结构-内存分层结构"><a href="#计算机体系结构-内存分层结构" class="headerlink" title="计算机体系结构/内存分层结构"></a>计算机体系结构/内存分层结构</h4><p>计算机体系结构<br>内存分层结构<br>在操作系统的内存管理范例</p>
+<h4 id="CPU处理速度"><a href="#CPU处理速度" class="headerlink" title="CPU处理速度"></a>CPU处理速度</h4><p>寄存器&gt; L1缓存&gt; L2缓存 &gt; 主存 &gt; 磁盘(虚拟内存)</p>
+<blockquote><p>内存 Memory 由二部分组成<br>第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要存放数据和程序的地方，所以也叫做“主存”，也就是我们平常说的，内存条，一旦断电数据就丢失了;</p><br><p>第二部分：Read-Only Memory（ROM），只读存储器，对于用户来说，它只能读取数据，不能写入信息，断电也没有关系，放ROM的数据一辈子都不会变，旧式电脑的BIOS放在ROM上</p><br><p><img src="https://pic3.zhimg.com/50/57accc32a92e037d96e9aa9211f9438a_hd.png" alt="存储器结构图"></p><footer><strong>DADAman</strong><cite><a href="https://www.zhihu.com/question/28445273" target="_blank" rel="external">电脑的主存储器和主存、内存的关系是什么？</a></cite></footer></blockquote>
+<h4 id="操作系统要完成的目标："><a href="#操作系统要完成的目标：" class="headerlink" title="操作系统要完成的目标："></a>操作系统要完成的目标：</h4><p>抽象：逻辑地址空间<br>保护：独立地址空间<br>共享：访问相同内存<br>虚拟化：更多的地址空间</p>
+<h4 id="操作系统管理内存的不同方法："><a href="#操作系统管理内存的不同方法：" class="headerlink" title="操作系统管理内存的不同方法："></a>操作系统管理内存的不同方法：</h4><p>程序重定位<br>分段<br>分页<br>虚拟内存<br>按需分页虚拟内存</p>
+<h4 id="实现高度依赖硬件"><a href="#实现高度依赖硬件" class="headerlink" title="实现高度依赖硬件"></a>实现高度依赖硬件</h4><p>必须知道内存架构<br>MMU(内存管理单元)：硬件组件负责处理CPU的内存访问请求</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/18/操作系统-学习笔记-启动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/18/操作系统-学习笔记-启动/" itemprop="url">操作系统-学习笔记-启动</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T22:10:40+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="BIOS："><a href="#BIOS：" class="headerlink" title="BIOS："></a>BIOS：</h4><p>将Bootloader从磁盘引导扇区(512bytes)加载到0x7c00<br>跳转到CS：IP=0000：7c00</p>
+<h4 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h4><p>将操作系统代码和数据从硬盘加载到内存中</p>
+<p>系统调用：应用程序主动向操作系统发出</p>
+<p>异常(来源于不良的应用程序)：非法指令或其他坏的处理状态(内存出错)</p>
+<p>中断(来源于设备)：来自不同的硬件设备的计时器和网络中断</p>
+<p>处理时间：<br>中断：异步<br>异常：同步<br>系统调用： 同步或异步</p>
+<p>响应时间：<br>中断：持续，对用户应用程序是透明的<br>异常：杀死或重新执行意想不到的应用程序指令<br>系统调用：等待和持续</p>
+<h4 id="中断-中断表"><a href="#中断-中断表" class="headerlink" title="中断  中断表"></a>中断  中断表</h4><h5 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h5><p>设置中断标记[cpu初始化]</p>
+<ol>
+<li>将内部、外部事件设置中断标记</li>
+<li>中断事件的id</li>
+</ol>
+<h5 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h5><ol>
+<li>保存当前处理的状态</li>
+<li>中断服务程序处理</li>
+<li>清楚中断标记</li>
+<li>恢复之前保存的处理状态</li>
+</ol>
+<h4 id="异常：异常编号"><a href="#异常：异常编号" class="headerlink" title="异常：异常编号"></a>异常：异常编号</h4><h5 id="保存现场"><a href="#保存现场" class="headerlink" title="保存现场"></a>保存现场</h5><h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><ol>
+<li>杀死产生了异常的程序</li>
+<li>重新执行异常指令<h5 id="恢复现场-也是透明的，用户感知不到"><a href="#恢复现场-也是透明的，用户感知不到" class="headerlink" title="恢复现场(也是透明的，用户感知不到)"></a>恢复现场(也是透明的，用户感知不到)</h5></li>
+</ol>
+<h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><p>系统调用接口<br>例： 应用程序调用printf() ，会 调用系统调用write()</p>
+<p>接口而不是直接进行系统调用</p>
+<p>win32 api：windows<br>posix api：posix-base systems，包括unix，linux，mac<br>java api：jvm</p>
+<p>操作系统 用户态，内核态</p>
+<h4 id="跨越操作系统边界的开销"><a href="#跨越操作系统边界的开销" class="headerlink" title="跨越操作系统边界的开销"></a>跨越操作系统边界的开销</h4><ul>
+<li>在执行时间上的开销超过程序调用</li>
+<li>开销：<br>建立中断/异常/系统调用号与对应服务例程映射关系的初始化开销<br>建立内核堆栈<br>验证参数<br>内核态映射到用户态的地址空间，更新页面映射权限<br>内核态独立地址空间  TLB</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/18/hexo如何添加音乐-视频/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/18/hexo如何添加音乐-视频/" itemprop="url">hexo如何添加音乐/视频</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T10:21:23+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="markdown兼容html，采用html标签添加"><a href="#markdown兼容html，采用html标签添加" class="headerlink" title="markdown兼容html，采用html标签添加"></a>markdown兼容html，采用html标签添加</h4><h5 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=400 height=500 src=&quot;/video/tt.mp4&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="400" height="500" src="/video/tt.mp4"></iframe>
+
+<h5 id="播放音乐"><a href="#播放音乐" class="headerlink" title="播放音乐"></a>播放音乐</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=462342208&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=462342208&auto=1&height=66"></iframe>
+
+
+<h4 id="通过hexo插件播放"><a href="#通过hexo插件播放" class="headerlink" title="通过hexo插件播放"></a>通过hexo插件播放</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% aplayer &quot;Caffeine&quot; &quot;Jeff Williams&quot; &quot;http://7xq131.com1.z0.glb.clouddn.com/Preparation.mp3&quot; &quot;autoplay&quot; %&#125;</div><div class="line"></div><div class="line">&#123;% dplayer &quot;url=http://devtest.qiniudn.com/若能绽放光芒.mp4&quot; &quot;api=http://dplayer.daoapp.io&quot; &quot;pic=http://devtest.qiniudn.com/若能绽放光芒.png&quot; &quot;id=9E2E3368B56CDBB4&quot; &quot;loop=yes&quot; &quot;theme=#FADFA3&quot; &quot;autoplay=false&quot; &quot;token=tokendemo&quot; %&#125;</div></pre></td></tr></table></figure>
+<p>不想搞了，这个总有错，给个链接，想弄的去看 <a href="http://www.jianshu.com/p/53e0d2a617da" target="_blank" rel="external">传送门</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/17/uml-学习笔记-UP过程和瀑布模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1218,385 +1646,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/15/人间词话-笔记学习-隔与不隔/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/15/人间词话-笔记学习-隔与不隔/" itemprop="url">人间词话-笔记学习-隔与不隔</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T12:06:24+08:00">
-                2017-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="隔与不隔"><a href="#隔与不隔" class="headerlink" title="　　　　　　　　　　　　隔与不隔"></a>　　　　　　　　　　　　隔与不隔</h2><p><strong>梅尧臣作此诗，欧阳修作少年游</strong></p>
-<h4 id="苏幕遮·草"><a href="#苏幕遮·草" class="headerlink" title="苏幕遮·草"></a>苏幕遮·草</h4><h6 id="宋-梅尧臣"><a href="#宋-梅尧臣" class="headerlink" title="宋 梅尧臣"></a>宋 梅尧臣</h6><p>露堤平，烟墅杳。乱碧萋萋，雨后江天晓。独有庾郎年最少。窣地春袍，嫩色宜相照。<br>接长亭，迷远道。堪怨王孙，不记归期早。落尽梨花春又了。满地残阳，翠色和烟老。</p>
-<p><strong>上阙不隔，下阙隔↓ </strong></p>
-<h4 id="少年游·栏干十二独凭春"><a href="#少年游·栏干十二独凭春" class="headerlink" title="少年游·栏干十二独凭春"></a>少年游·栏干十二独凭春</h4><h6 id="宋-欧阳修"><a href="#宋-欧阳修" class="headerlink" title="宋 欧阳修"></a>宋 欧阳修</h6><p>栏干十二独凭春，晴碧远连云。千里万里，二月三月，行色苦愁人。<br>谢家池上，江淹浦畔，吟魄与离魂。那堪疏雨滴黄昏。更特地、忆王孙。</p>
-<p>楼阁玲珑五云起，其中绰约多仙子。中有一人字太真，雪肤花貌参差是。 —白居易《长恨歌》</p>
-<p><strong>不隔，浑然一体，如在眼前*↓</strong></p>
-<h4 id="饮酒·其五"><a href="#饮酒·其五" class="headerlink" title="饮酒·其五"></a>饮酒·其五</h4><h6 id="魏晋-陶渊明"><a href="#魏晋-陶渊明" class="headerlink" title="魏晋 陶渊明"></a>魏晋 陶渊明</h6><p>结庐在人境，而无车马喧。<br>问君何能尔？心远地自偏。<br>采菊东篱下，悠然见南山。<br>山气日夕佳，飞鸟相与还。<br>此中有真意，欲辨已忘言。</p>
-<h4 id="敕勒歌"><a href="#敕勒歌" class="headerlink" title="敕勒歌"></a>敕勒歌</h4><h6 id="南北朝-乐府诗集"><a href="#南北朝-乐府诗集" class="headerlink" title="南北朝 乐府诗集"></a>南北朝 乐府诗集</h6><p>敕勒川，阴山下。天似穹庐，笼盖四野。<br>天苍苍，野茫茫。风吹草低见牛羊。</p>
-<p><strong>王国维所处时代，推崇诗风晦涩，故王国维提出隔与不隔</strong></p>
-<h4 id="八声甘州·灵岩陪庾幕诸公游"><a href="#八声甘州·灵岩陪庾幕诸公游" class="headerlink" title="八声甘州·灵岩陪庾幕诸公游"></a>八声甘州·灵岩陪庾幕诸公游</h4><h6 id="宋-吴文英"><a href="#宋-吴文英" class="headerlink" title="宋 吴文英"></a>宋 吴文英</h6><p>渺空烟四远，是何年、青天坠长星？幻苍崖云树，名娃金屋，残霸宫城。箭径酸风射眼，腻水染花腥。时靸双鸳响，廊叶秋声。<br>宫里吴王沉醉，倩五湖倦客，独钓醒醒。问苍波无语，华发奈山青。水涵空、阑干高处，送乱鸦斜日落渔汀。连呼酒、上琴台去，秋与云平。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/15/人间词话-笔记学习-忧生忧世/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/15/人间词话-笔记学习-忧生忧世/" itemprop="url">人间词话-笔记学习-忧生忧世</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T12:06:13+08:00">
-                2017-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="忧生忧世"><a href="#忧生忧世" class="headerlink" title="　　　　　　　　　　　　忧生忧世"></a>　　　　　　　　　　　　忧生忧世</h2><h4 id="饮酒-二十"><a href="#饮酒-二十" class="headerlink" title="饮酒 二十"></a>饮酒 二十</h4><h6 id="晋-陶渊明"><a href="#晋-陶渊明" class="headerlink" title="晋 陶渊明"></a>晋 陶渊明</h6><p>羲农去我久，举世少复真。<br>汲汲鲁中叟，弥缝使其淳。<br>凤鸟虽不至，礼乐暂得新，<br>洙泗辍微响，漂流逮狂秦。<br>诗书复何罪？一朝成灰尘。<br>区区诸老翁，为事诚殷勤。<br>如何绝世下，六籍无一亲。<br>终日驰车走，不见所问津。<br>若复不快饮，空负头上巾。<br>但恨多谬误，君当恕醉人。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/15/人间词话-笔记学习-词品人品/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/15/人间词话-笔记学习-词品人品/" itemprop="url">人间词话-笔记学习-词品人品</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T12:05:40+08:00">
-                2017-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="词品人品"><a href="#词品人品" class="headerlink" title="　　　　　　　　　　　　词品人品"></a>　　　　　　　　　　　　词品人品</h2><h4 id="菩萨蛮"><a href="#菩萨蛮" class="headerlink" title="菩萨蛮"></a>菩萨蛮</h4><h6 id="唐-韦庄"><a href="#唐-韦庄" class="headerlink" title="唐 韦庄"></a>唐 韦庄</h6><p>红楼别夜堪惆怅，香灯半卷流苏帐。<br>残月出门时，美人和泪辞。<br>琵琶金翠羽，弦上黄莺语。<br>劝我早归家，绿窗人似花。</p>
-<p>人人尽说江南好，游人只合江南老。<br>春水碧于天，画船听雨眠。<br>垆边人似月，皓腕凝霜雪。<br>未老莫还乡，还乡须断肠。</p>
-<p>如今却忆江南乐，当时年少春衫薄。<br>骑马倚斜桥，满楼红袖招。<br>翠屏金屈曲，醉入花丛宿。<br>此度见花枝，白头誓不归。</p>
-<p>劝君今夜须沉醉，樽前莫话明朝事。<br>珍重主人心，酒深情亦深。<br>须愁春漏短，莫诉金杯满。<br>遇酒且呵呵，人生能几何。</p>
-<p>洛阳城里春光好，洛阳才子他乡老。<br>柳暗魏王堤，此时心转迷。<br>桃花春水渌，水上鸳鸯浴。<br>凝恨对残晖，忆君君不知</p>
-<h4 id="更漏子·柳丝长》"><a href="#更漏子·柳丝长》" class="headerlink" title="更漏子·柳丝长》"></a>更漏子·柳丝长》</h4><h6 id="唐-温庭筠"><a href="#唐-温庭筠" class="headerlink" title="唐 温庭筠"></a>唐 温庭筠</h6><p>柳丝长，春雨细，花外漏声迢递。惊塞雁，起城乌，画屏金鹧鸪。<br>香雾薄，透帘幕，惆怅谢家池阁。红烛背，绣帘垂，梦长君不知</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1646,7 +1700,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -258,6 +258,659 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/31/操作系统-学习笔记-线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/操作系统-学习笔记-线程/" itemprop="url">操作系统-学习笔记-线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T19:47:34+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理</h4><p>自从60年代以来提出进程概念以来，在操作系统中一直都是以进程作为独立运行的基本单位，直到80年代中期，人们又提出了更小的能独立运行的基本单位——线程。</p>
+<ol>
+<li><strong>为什么使用线程？</strong><br>[案例] 编写一个MP3播放软件。</li>
+</ol>
+<p>核心功能模块有三个：<br>(1) 从MP3音频文件当中读取数据；</p>
+<p>(2) 对数据进行解压缩；</p>
+<p>(3) 把解压缩后的音频数据播放出来。</p>
+<p><strong>单进程</strong><br><img src="./p1.png" alt="p1"></p>
+<p><strong>多进程</strong><br><img src="./p2.png" alt="p2"></p>
+<p>怎么解决这些问题？<br>需要提出一种新的实体，满足一下特性：<br>(1) 实体之间可以并发地执行；<br>(2) 实体之间共享相同的地址空间；</p>
+<p>这种实体就是： <strong>线程（Thread）</strong></p>
+<ol>
+<li>什么是线程<br>Thread：<strong>进程当中的一条执行流程。</strong></li>
+</ol>
+<p>从两个方面来重新理解进程</p>
+<p>从资源组合的角度：进程把一组相关的资源组合起来，构成了一个资源平台(环境)，包括地址空间（代码段、数据段）、打开的文件等各种资源；</p>
+<p>从运行的角度：代码在这个资源平台上的一条执行流程（线程）</p>
+<p><img src="./p3.png" alt="p3"></p>
+<p>线程 = 进程 - 共享资源</p>
+<h4 id="线程的优点："><a href="#线程的优点：" class="headerlink" title="线程的优点："></a>线程的优点：</h4><p>一个进程中可以同时存在多个线程；<br>各个线程之间可以并发地执行；<br>各个线程之间可以共享地址空间和文件等资源</p>
+<h4 id="线程的缺点："><a href="#线程的缺点：" class="headerlink" title="线程的缺点："></a>线程的缺点：</h4><p>一个线程崩溃，会导致其所属进程的所有线程崩溃。</p>
+<p><img src="./p4.png" alt="p4"></p>
+<h4 id="线程和进程的比较："><a href="#线程和进程的比较：" class="headerlink" title="线程和进程的比较："></a>线程和进程的比较：</h4><p>进程是资源分配的单位，线程是CPU调度单位；</p>
+<p>进程拥有一个完整的资源平台，而线程只独享必不可少的资源，如寄存器和栈；</p>
+<p>线程同样具有就绪、阻塞、执行三种基本状态，同样具有状态之间的转换关系；</p>
+<p>线程能减少并发执行的时间和空间开销：<br>—— 线程的创建时间比进程短<br>—— 线程的终止时间比进程短<br>—— 同一进程内的线程切换时间比进程短<br>—— 由于同一进程的各线程间共享内存和文件资源，可直接进行不通过内核的通信；</p>
+<ol>
+<li>线程的实现</li>
+</ol>
+<p>主要有三种线程的实现方式：<br><strong>用户线程</strong>：在用户空间实现<br><strong>POSIX Pthreads， Mach C-threads， Solaris threads</strong><br>操作系统看不到，由用户应用态的用户线程库来实现和管理</p>
+<p><strong>内核线程</strong>：在内核中实现<br><strong>Windows ， Solaris ， Linux</strong><br>由操作系统来管理</p>
+<p><strong>用户线程与内核线程的对应关系</strong><br>多对一<br>一对一<br>多对多</p>
+<h4 id="用户线程"><a href="#用户线程" class="headerlink" title="用户线程"></a>用户线程</h4><p><img src="./p5.png" alt="p5"></p>
+<p>在用户空间实现的线程机制，它不依赖于操作系统的内核，由一组用户级的线程库函数来完成线程的管理，包括线程的创建、终止、同步和调度等。</p>
+<ul>
+<li>由于用户线程的维护由相应进程来完成（通过线程库函数），不需要操作系统内核了解用户线程的存在，可用于不支持线程技术的多进程操作系统；</li>
+<li>每个进程都需要它自己私有的线程控制块（TCB）列表，用来跟踪记录它的各个线程的状态信息（PC、栈指针、寄存器），TCB由线程库函数来完成；</li>
+<li>用户线程的切换也是由线程库函数来完成、无需用户态/核心态切换，所以速度特别快；</li>
+<li>允许每个进程拥有自定义的线程调度算法。</li>
+</ul>
+<p>用户线程的缺点：</p>
+<ul>
+<li>阻塞性的系统调用如何实现？如果一个线程发起系统调用而阻塞，则整个进程在等待；</li>
+<li>当一个线程开始运行后，除非它主动地交出CPU的使用权，否则它所在的进程当中的其他线程将无法运行；</li>
+<li>由于时间片分配给进程，故与其他进程比，在多线程执行时，每个线程得到的时间片较少，执行会慢。</li>
+</ul>
+<h4 id="内核线程"><a href="#内核线程" class="headerlink" title="内核线程"></a>内核线程</h4><p><img src="./p6.png" alt="p6"></p>
+<p>是指在操作系统的内核当中实现的一种线程机制，由操作系统的内核来完成线程的创建、终止和管理。</p>
+<ul>
+<li>在支持内核线程的操作系统中，由内核来维护进程和线程的上下文信息（PCB和TCB）；</li>
+<li>线程的创建、终止和切换都是通过系统调用/内核函数的方式来进行的，由内核来完成，因此系统开销较大；</li>
+<li>在一个进程当中，如果某个内核线程发起系统调用而被阻塞，并不会影响其他内核线程的运行；</li>
+<li>时间片分配给线程，多线程的进程获得更多的CPU时间；</li>
+<li>Windows NT 和 Windows 2000/XP 支持内核线程。</li>
+</ul>
+<p><strong>轻量级进程</strong>：在内核中实现，支持用户线程<br><strong>Solaris （LightWeight Process）</strong></p>
+<p>它是内核支持的用户线程。一个进程可有一个或多个轻量级进程，每个量级进程由一个单独的内核线程来支持。（Solaris、Linux）</p>
+<p><img src="./p7.png" alt="p7"></p>
+<ol>
+<li>多线程编程接口举例</li>
+</ol>
+<p><img src="./p2.png" alt="p2"></p>
+<h4 id="上下文切换（context-switch）"><a href="#上下文切换（context-switch）" class="headerlink" title="上下文切换（context switch）"></a>上下文切换（context switch）</h4><p>停止当前运行进程（从运行状态改变为其他状态）并且调度其他进程（转变为运行状态）</p>
+<ul>
+<li>必须在切换之前存储许多部分的进程上下文</li>
+<li>必须能够在之后恢复他们，所以进程不能显示它曾经被暂停过</li>
+<li>必须快速（上下文转换是非常频繁的）</li>
+</ul>
+<p>需要存储什么上下文？</p>
+<ul>
+<li>寄存器（PC、SP、….），CPU状态，…</li>
+<li>一些时候可能会费时，所以我们应该尽可能避免</li>
+</ul>
+<p><img src="./p8.png" alt="p8"></p>
+<p>操作系统为活跃进程准备了进程控制块（PCB）</p>
+<p>操作系统将进程控制块（PCB）放置在一个合适的队列里</p>
+<ul>
+<li>就绪队列</li>
+<li>等待I/O队列（每个设备的队列）</li>
+<li>僵尸队列</li>
+</ul>
+<p><img src="./p9.png" alt="p9"></p>
+<h4 id="进程控制——创建进程"><a href="#进程控制——创建进程" class="headerlink" title="进程控制——创建进程"></a>进程控制——创建进程</h4><h4 id="进程控制——加载和执行进程"><a href="#进程控制——加载和执行进程" class="headerlink" title="进程控制——加载和执行进程"></a>进程控制——加载和执行进程</h4><p><img src="./p10.png" alt="p10"><br><img src="./p11.png" alt="p11"><br><img src="./p12.png" alt="p12"></p>
+<p>Exec（）调用允许一个进程“加载”一个不同的程序并且在main开始执行（事实上_start）</p>
+<p>它允许一个进程指定参数的数量（argc）和它字符串参数数组（argv）</p>
+<p>如果调用成功</p>
+<ul>
+<li>它是相同的进程</li>
+<li>但是它运行了不同的程序</li>
+</ul>
+<p>代码，stack（栈） &amp; heap（堆）重写</p>
+<h4 id="fork（）的简单实现"><a href="#fork（）的简单实现" class="headerlink" title="fork（）的简单实现"></a>fork（）的简单实现</h4><p>对子进程分配内存<br>复制父进程的内存和CPU寄存器到子进程里<br>开销昂贵</p>
+<h4 id="99-的情况里，我们在fork（）之后调用exec（）"><a href="#99-的情况里，我们在fork（）之后调用exec（）" class="headerlink" title="99%的情况里，我们在fork（）之后调用exec（）"></a>99%的情况里，我们在fork（）之后调用exec（）</h4><p>在fork（）操作中内存复制是没有作用的<br>子进程将可能关闭打开的文件和连接<br>开销因此是高的<br>为什么不能结合它们在一个调用中（OS/2 ，Windows）？</p>
+<h4 id="vfork（）"><a href="#vfork（）" class="headerlink" title="vfork（）"></a>vfork（）</h4><p>一个创建进程的系统调用，不需要创建一个同样的内存映像<br>一些时候成为轻量级fork（）<br>子进程应该几乎立即调用exec（）<br>现在不再使用如果我们使用Copy on Write（COW）技术</p>
+<h4 id="wait（）系统调用是被父进程用来等待子进程的结束"><a href="#wait（）系统调用是被父进程用来等待子进程的结束" class="headerlink" title="wait（）系统调用是被父进程用来等待子进程的结束"></a>wait（）系统调用是被父进程用来等待子进程的结束</h4><p>一个子进程向父进程返回一个值，所以父进程必须接受这个值处理</p>
+<p>wait（）系统和调用担任这个要求</p>
+<ul>
+<li>它使父进程去睡眠来等待子进程的结束</li>
+<li><p>当一个子进程调用exit（）的时候，操作系统解锁父进程，并且将通过exit（）传递得到的返回值作为wait调用的一个结果（连同子进程的pid一起）如果这里没有子进程存活，wait（）立即返回</p>
+</li>
+<li><p>当然，如果这里有为父进程的僵尸等待，wait（）立即返回其中一个值（并且解锁僵尸状态）</p>
+</li>
+</ul>
+<p>进程结束之后，它调用exit（）</p>
+<p>这个系统调用：<br>将这程序的“结果”作为一个参数<br>关闭所有打开的文件，连接等等<br>释放内存<br>释放大部分支持进程的操作系统结构<br>检查是否父进程是存活着的</p>
+<ul>
+<li>如果是的话，它保留结果的值直到父进程需要它，在这种情况下，进程没有真正死亡，但是它们进入僵尸（zimbie/defunct）状态</li>
+<li>如果没有，它释放所有的数据结构，这个进程死亡</li>
+</ul>
+<p>清理所有等待的僵尸进程</p>
+<p><img src="./p13.png" alt="p13"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-进程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-进程/" itemprop="url">操作系统-学习笔记-进程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T22:59:15+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h4><ol>
+<li>进程（Process）描述</li>
+<li>进程状态(State)</li>
+<li>线程（Thread）</li>
+<li>进程间通信（Inter-Process Communication）</li>
+<li>进程互斥与同步</li>
+<li>死锁（DeadLock）</li>
+</ol>
+<p><strong>进程</strong>：一个具有一定独立功能的程序在一个数据集合上的一次动态执行过程</p>
+<h4 id="进程的组成："><a href="#进程的组成：" class="headerlink" title="进程的组成："></a>进程的组成：</h4><ul>
+<li>程序的代码；</li>
+<li>程序处理的数据；</li>
+<li>程序计数器中的值，指示下一条将运行的指令；</li>
+<li>一组通用的寄存器的当前值，堆，栈；</li>
+<li>一组系统资源（如打开的文件）</li>
+</ul>
+<p>总之，进程包含了正在运行的程序的所有状态信息。</p>
+<h4 id="进程和程序的联系"><a href="#进程和程序的联系" class="headerlink" title="进程和程序的联系"></a>进程和程序的联系</h4><ul>
+<li>程序是产生进程的基础</li>
+<li>程序的每次运行构成不同的进程</li>
+<li>进程是程序功能的体现</li>
+<li>通过多次执行，一个程序可对应多个进程；通过调用关系，一个进程可包括多个程序</li>
+</ul>
+<h4 id="进程与程序的区别"><a href="#进程与程序的区别" class="headerlink" title="进程与程序的区别"></a>进程与程序的区别</h4><p>进程是动态的，程序是静态的；程序是有序代码的集合；进程是程序的执行，进程有核心态/用户态</p>
+<p>进程是暂时的，程序是永久的；进程是一个状态变化的过程，程序是可长久保存的</p>
+<p>进程与程序的组成不同：进程的组成包括程序，数据和进程控制（即进程状态信息）</p>
+<p><img src="./p.png" alt="p"></p>
+<h4 id="进程的特点"><a href="#进程的特点" class="headerlink" title="进程的特点"></a>进程的特点</h4><p>动态性：可动态的创建，结束进程；</p>
+<p>并发性：进程可以被独立调度并占用处理机运行；并发并行；</p>
+<p>独立性：不同进程的工作不互相影响；</p>
+<p>制约性：因访问共享数据/资源或进程间同步而产生制约</p>
+<p>程序 = 算法 + 数据结构</p>
+<p>描述进程的数据结构：<strong>进程控制块（Process Control Block，PCB）</strong></p>
+<p>操作系统为每个进程都维护了一个PCB，用来保存与该进程有关的各种状态信息</p>
+<h4 id="进程控制结构"><a href="#进程控制结构" class="headerlink" title="进程控制结构"></a>进程控制结构</h4><p>进程控制块：操作系统管理控制进程运行所用的信息集合。操作系统用PCB来描述进程的基本情况以及运行变化的过程，PCB是进程存在的唯一标志。</p>
+<h4 id="使用进程控制块"><a href="#使用进程控制块" class="headerlink" title="使用进程控制块"></a>使用进程控制块</h4><p>进程的创建：为该进程生成一个PCB<br>进程的终止：回收它的PCB<br>进程的组织管理：通过对PCB的组织管理来实现</p>
+<h4 id="PCB包含一下三大类信息："><a href="#PCB包含一下三大类信息：" class="headerlink" title="PCB包含一下三大类信息："></a>PCB包含一下三大类信息：</h4><p>（一）<strong>进程标识信息</strong>。 如本进程的标识，本进程的产生者标志（父进程标识）；用户标识。<br>（二）<strong>处理机状态信息保存区</strong>。保存进程的运行现场信息：<br><strong>用户可见寄存器</strong>，用户程序可以使用的数据，地址等寄存器。<br><strong>控制和状态寄存器</strong>，如程序计数器（PC），程序状态字（PSW）。<br><strong>栈指针</strong>，过程调用/系统调用/中断处理和返回时需要用到它们。</p>
+<p>（三）进程控制信息：<br><strong>调度和状态信息</strong>，用于操作系统调度进程并占用处理机使用。<br><strong>进程间通信</strong>，为支持进程间的与通信相关的各种标识，信号，信件等，这些信息存在接收方的进程控制块中。<br><strong>存储管理信息</strong>，包含有指向本进程映像存储空间的数据结构。<br><strong>进程所用资源</strong>，说明由进程打开、使用的系统资源，如打开的文件等。<br><strong>有关数据结构连接信息</strong>，进程可以连接到一个进程队列中，或连接到相关的其他进程的PCB。</p>
+<h4 id="PCB的组织方式"><a href="#PCB的组织方式" class="headerlink" title="PCB的组织方式"></a>PCB的组织方式</h4><p>链表：同一状态的进程其PCB成一个链表，多个状态对应多个不同的链表（各状态的进程形成不同的链表：就绪链表、阻塞链表）</p>
+<p>索引表：同一状态的进程归入一个index表（由index指向PCB），多个状态对应对个不同的index表（各状态的进程形成不同的索引表：就绪索引表、阻塞索引表）</p>
+<p><img src="./p1.png" alt="p1"></p>
+<h4 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h4><p>进程的生命期管理<br>进程状态变化模型<br>进程挂起模型</p>
+<h4 id="进程的生命期管理"><a href="#进程的生命期管理" class="headerlink" title="进程的生命期管理"></a>进程的生命期管理</h4><p>进程创建<br>进程运行<br>进程等待<br>进程唤醒<br>进程结束</p>
+<h4 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h4><p>引起进程创建的3个主要事件：</p>
+<ul>
+<li>系统初始化时</li>
+<li>用户请求创建一个新进程</li>
+<li>正在运行的进程执行了创建进程的系统调用</li>
+</ul>
+<h4 id="进程运行"><a href="#进程运行" class="headerlink" title="进程运行"></a>进程运行</h4><p>内核选择一个就绪的进程，让它占用处理机并执行</p>
+<ul>
+<li>为何选择？</li>
+<li>如何选择？</li>
+</ul>
+<h4 id="进程等待"><a href="#进程等待" class="headerlink" title="进程等待"></a>进程等待</h4><p>在以下情况下，进程等待（阻塞）：</p>
+<ol>
+<li>请求并等待系统服务，无法马上完成</li>
+<li>启动某种操作，无法马上完成</li>
+<li>需要的数据没有到达</li>
+</ol>
+<p>进程只能自己阻塞自己，因为只有进程自身才能知道何时需要等待某种事件的发生</p>
+<h4 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h4><p>唤醒进程的原因：</p>
+<ol>
+<li>被阻塞进程需要的资源可被满足</li>
+<li>被阻塞进程等待的事件到达</li>
+<li>将该进程的PCB插入到就绪队列</li>
+</ol>
+<p><strong>进程只能被别的进程或操作系统唤醒。</strong></p>
+<h4 id="进程结束"><a href="#进程结束" class="headerlink" title="进程结束"></a>进程结束</h4><p>在以下4种情形下，进程结束：</p>
+<ul>
+<li>正常退出（自愿的）</li>
+<li>错误退出（自愿的）</li>
+<li>致命错误（强制性的）</li>
+<li>被其他进程所杀（强制性的）</li>
+</ul>
+<p><img src="./p2.png" alt="p2"></p>
+<h4 id="进程状态变化模型"><a href="#进程状态变化模型" class="headerlink" title="进程状态变化模型"></a>进程状态变化模型</h4><p>进程的三种基本状态：<br>进程在生命结束前处于且仅处于三种基本状态之一，不同系统设置的进程状态数目不同</p>
+<p>运行状态（Running）：当一个程序正在处理机上运行时</p>
+<p>就绪状态（Ready）：一个进程获得了除处理机之外的一切所需资源，一旦得到处理机即可运行</p>
+<p>等待状态（又称阻塞状态Blocked）：一个进程正在等待某个事件而暂停运行时。如等待某资源，等待输入/输出完成。</p>
+<p><img src="./p3.png" alt="p3"></p>
+<p>进程的其他基本状态：<br>创建状态（New）：一个进程正在被创建，还没被转到就绪状态之前的状态</p>
+<p>结束状态（Exit）：一个进程正在从系统中消失时的状态，这是因为进程结束或由于其他原因所导致的</p>
+<p><img src="./p4.png" alt="p4"></p>
+<h4 id="进程挂起"><a href="#进程挂起" class="headerlink" title="进程挂起"></a>进程挂起</h4><p>Why？合理且充分地利用系统资源。</p>
+<p>进程在挂起状态时，意味着进程没有占用内存空间。处于挂起状态的进程映像在磁盘上。</p>
+<p><img src="./p5.png" alt="p5"></p>
+<h4 id="挂起状态"><a href="#挂起状态" class="headerlink" title="挂起状态"></a>挂起状态</h4><p><strong>阻塞挂起状态</strong>：进程在外存并等待某事件的出现；<br><strong>就绪挂起状态</strong>：进程在外存，但只要进入内存，即可运行；</p>
+<h4 id="与挂起相关的状态转换"><a href="#与挂起相关的状态转换" class="headerlink" title="与挂起相关的状态转换"></a>与挂起相关的状态转换</h4><p>挂起（Suspend）：把一个进程从内存存到外存；可能有以下几种情况：<br><strong>阻塞到阻塞挂起</strong>：没有进程处于就绪状态或就绪进程要求更多内存资源时，会进行这种转换，以提交新进程或运行就绪进程</p>
+<p><strong>就绪到就绪挂起</strong>：当有高优先级阻塞（系统认为会很快就绪的）进程和低优先就绪进程时，系统会选择挂起低优先级就绪进程</p>
+<p><strong>运行到就绪挂起</strong>：对抢先式分时系统，当有高优先级阻塞挂起进程因事件出现而进入就绪挂起时，系统可能会把运行进程转到就绪挂起状态</p>
+<p>在外存时的状态转换：<br><strong>阻塞挂起到就绪挂起</strong>：当有阻塞挂起进程因相关事件出现时，系统会把阻塞挂起进程转换为就绪挂起进程。</p>
+<p>解挂/激活（Activate）：把一个进程从外存转入到内存；可能有以下几种情况：<br><strong>就绪挂起到就绪</strong>：没有就绪进程或挂起就绪进程优先级高于就绪进程时，会进行这种转换</p>
+<p><strong>阻塞挂起到阻塞</strong>：当一个进程释放足够内存时，系统会把一个高优先级阻塞挂起（系统认为会很快出现所等待的事件）进程转换为阻塞进程；</p>
+<p>从进程的观点来看OS：用户进程、磁盘管理进程、中断进程……</p>
+<p><img src="./p6.png" alt="p6"></p>
+<p><strong>状态队列</strong></p>
+<ul>
+<li><p>由操作系统来维护一组队列，用来表示系统当中所有进程的当前状态；</p>
+</li>
+<li><p>不同的状态分别用不同的队列表示（就绪队列、各种类型的阻塞队列）；</p>
+</li>
+<li><p>每个进程的PCB都根据它的状态加入到相应的队列当中，当一个进程的状态发生变化时，它的PCB从一个状态队列中脱离出来，加入到另外一个队列中。</p>
+</li>
+</ul>
+<p><img src="./p7.png" alt="p7"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-抖动问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/操作系统-学习笔记-抖动问题/" itemprop="url">操作系统-学习笔记-抖动问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T20:45:15+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>抖动问题（thrashing）</p>
+<p>如果分配给一个进程的物理页面太少，不能包含整个工作集，即常驻集$\subset$工作集，那么进程将会造成很多的缺页中断，需要频繁地在内存和外存之间替换页面，从而使进程的运行速度变得很慢，我们把这种状态成为“抖动”</p>
+<p>产生抖动的原因： 随着驻留内存的进程数目增加，分配给每个    进程的物理页面数不断减少，缺页率不断上升。所以OS要选择一个适当的进程数目和进程需要的帧数，以便在并发水平和缺页率之间达到一个平衡</p>
+<p><img src="./p.png" alt="p"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-两个全局置换算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1325,455 +1978,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/25/操作系统-学习笔记-最近最久未使用算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/25/操作系统-学习笔记-最近最久未使用算法/" itemprop="url">操作系统-学习笔记-最近最久未使用算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T15:10:30+08:00">
-                2017-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="最近最久未使用算法"><a href="#最近最久未使用算法" class="headerlink" title="最近最久未使用算法"></a>最近最久未使用算法</h4><p>基本思路:当一个缺页中断发生时，选择最久未使用的那个页面，并淘汰之。</p>
-<p>它是对最优页面置换算法的一个近似，其依据是程序的局部性原理，即在最近一小段时间（或几条指令内），如果某些页面被频繁地访问，那么在将来一小段时间内，它们还可能被再一次频繁访问。反过来说，如果过去某些页面长时间未访问，那么在将来它们还可能会长时间地得不到访问。</p>
-<p><img src="./1.png" alt="p1"></p>
-<h4 id="LRU-算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是："><a href="#LRU-算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是：" class="headerlink" title="LRU 算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是："></a>LRU 算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是：</h4><ol>
-<li><p>系统维护一个页面链表，最近刚刚使用过的页面作为首节点，最久未使用的页面最为尾节点。每次访问内存时，找到相应的页面，把它从链表中摘下来，再移动到链表之首。每次缺页中断发生时，淘汰链表末尾的页面。</p>
-</li>
-<li><p>设置一个活动页面栈，当访问某页时，将此页号压入栈顶，然后，考察栈内是否有与此页面相同的页号，若有则抽出。当需要淘汰一个页面时，总是选择栈底的页面，它就是最久未使用的。</p>
-</li>
-</ol>
-<p><img src="./2.png" alt="p2"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/25/操作系统-学习笔记-先进先出算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/25/操作系统-学习笔记-先进先出算法/" itemprop="url">操作系统-学习笔记-先进先出算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T11:31:44+08:00">
-                2017-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="先进先出算法-First-in-First-out-FIFO"><a href="#先进先出算法-First-in-First-out-FIFO" class="headerlink" title="先进先出算法(First-in First-out, FIFO)"></a>先进先出算法(First-in First-out, FIFO)</h4><p>基本思路：选择在内存中驻留时间最长的页面并淘汰之。具体来讲，系统维护着一个链表，记录了所有位于内存中的逻辑页面。从链表的排列顺序来看，链首页面的驻留时间最长，链尾驻留时间最短。当发生一个缺页中断时，把链首页面淘汰出局，并把新的页面添加到链表末尾。</p>
-<p>性能较差，调出的页面有可能是经常要访问的页面，并且有Belayd现象。FIFO很少单独使用。</p>
-<p>例子:<br><img src="./1.png" alt="p1"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/24/操作系统-学习笔记-最优页面置换算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/24/操作系统-学习笔记-最优页面置换算法/" itemprop="url">操作系统-学习笔记-最优页面置换算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T22:37:44+08:00">
-                2017-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h4><p>功能与目标<br>功能：当缺页中断发生，需要调入新的页面而内存已满时，选择内存当中哪个物理页面被置换。</p>
-<p>目标:尽可能地减少页面换进换出次数（即缺页中断的次数）具体来说，把未来不再使用的或短期内较少使用的页面换出，通常只能在局部性原理指导下依据过去的统计数据来预测;</p>
-<p>页面锁定(frame locking)：用于描述必须常驻内存的操作系统的关键部分或时间关键(time-critical)的应用程序。实现方法是：在页表中添加锁定标志位(lock-bit)。</p>
-<p><img src="./1.png" alt="p1"></p>
-<h4 id="最优页面置换算法-OPT-optimal"><a href="#最优页面置换算法-OPT-optimal" class="headerlink" title="最优页面置换算法(OPT,optimal)"></a>最优页面置换算法(OPT,optimal)</h4><p>基本思路：当一个缺页中断发生时，对保存在内存中的每个逻辑页面，计算在它的下一次访问之前，还需要等待多长时间，从中选择等待时间最长的那个,作为被置换的页面。</p>
-<p>这只是一种理想情况，在实际系统中是无法实现的，因为操作系统无从知道每个页面要等待多长时间以后才会被再次访问。</p>
-<p>可以作为其他算法的性能评价标准的依据(在一个模拟器上运行某个程序，并记录每一次的页面访问情况，在第二遍运行时即可使用最优算法)。</p>
-<p><img src="./2.png" alt="p2"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1823,7 +2032,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

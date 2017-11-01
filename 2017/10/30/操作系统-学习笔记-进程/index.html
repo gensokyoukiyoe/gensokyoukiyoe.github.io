@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="进程管理
+进程（Process）描述
+进程状态(State)
+线程（Thread）
+进程间通信（Inter-Process Communication）
+进程互斥与同步
+死锁（DeadLock）
+
+进程：一个具有一定独立功能的程序在一个数据集合上的一次动态执行过程
+进程的组成：
+程序的代码；
+程序处理的数据；
+程序计数器中的值，指示下一条将运行的指令；
+一组通用的寄存器的当前值，堆，栈；
+一组系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-学习笔记-进程">
+<meta property="og:url" content="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-进程/index.html">
+<meta property="og:site_name" content="枳ukiyoe's blog">
+<meta property="og:description" content="进程管理
+进程（Process）描述
+进程状态(State)
+线程（Thread）
+进程间通信（Inter-Process Communication）
+进程互斥与同步
+死锁（DeadLock）
+
+进程：一个具有一定独立功能的程序在一个数据集合上的一次动态执行过程
+进程的组成：
+程序的代码；
+程序处理的数据；
+程序计数器中的值，指示下一条将运行的指令；
+一组通用的寄存器的当前值，堆，栈；
+一组系统">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p1.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p2.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p3.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p4.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p5.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p6.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p7.png">
+<meta property="og:updated_time" content="2017-10-31T11:45:47.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统-学习笔记-进程">
+<meta name="twitter:description" content="进程管理
+进程（Process）描述
+进程状态(State)
+线程（Thread）
+进程间通信（Inter-Process Communication）
+进程互斥与同步
+死锁（DeadLock）
+
+进程：一个具有一定独立功能的程序在一个数据集合上的一次动态执行过程
+进程的组成：
+程序的代码；
+程序处理的数据；
+程序计数器中的值，指示下一条将运行的指令；
+一组通用的寄存器的当前值，堆，栈；
+一组系统">
+<meta name="twitter:image" content="gensokyoukiyoe.github.io/./p.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-进程/"/>
+
+
+
+
+
+  <title>操作系统-学习笔记-进程 | 枳ukiyoe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">枳ukiyoe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/30/操作系统-学习笔记-进程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统-学习笔记-进程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T22:59:15+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h4><ol>
+<li>进程（Process）描述</li>
+<li>进程状态(State)</li>
+<li>线程（Thread）</li>
+<li>进程间通信（Inter-Process Communication）</li>
+<li>进程互斥与同步</li>
+<li>死锁（DeadLock）</li>
+</ol>
+<p><strong>进程</strong>：一个具有一定独立功能的程序在一个数据集合上的一次动态执行过程</p>
+<h4 id="进程的组成："><a href="#进程的组成：" class="headerlink" title="进程的组成："></a>进程的组成：</h4><ul>
+<li>程序的代码；</li>
+<li>程序处理的数据；</li>
+<li>程序计数器中的值，指示下一条将运行的指令；</li>
+<li>一组通用的寄存器的当前值，堆，栈；</li>
+<li>一组系统资源（如打开的文件）</li>
+</ul>
+<p>总之，进程包含了正在运行的程序的所有状态信息。</p>
+<h4 id="进程和程序的联系"><a href="#进程和程序的联系" class="headerlink" title="进程和程序的联系"></a>进程和程序的联系</h4><ul>
+<li>程序是产生进程的基础</li>
+<li>程序的每次运行构成不同的进程</li>
+<li>进程是程序功能的体现</li>
+<li>通过多次执行，一个程序可对应多个进程；通过调用关系，一个进程可包括多个程序</li>
+</ul>
+<h4 id="进程与程序的区别"><a href="#进程与程序的区别" class="headerlink" title="进程与程序的区别"></a>进程与程序的区别</h4><p>进程是动态的，程序是静态的；程序是有序代码的集合；进程是程序的执行，进程有核心态/用户态</p>
+<p>进程是暂时的，程序是永久的；进程是一个状态变化的过程，程序是可长久保存的</p>
+<p>进程与程序的组成不同：进程的组成包括程序，数据和进程控制（即进程状态信息）</p>
+<p><img src="./p.png" alt="p"></p>
+<h4 id="进程的特点"><a href="#进程的特点" class="headerlink" title="进程的特点"></a>进程的特点</h4><p>动态性：可动态的创建，结束进程；</p>
+<p>并发性：进程可以被独立调度并占用处理机运行；并发并行；</p>
+<p>独立性：不同进程的工作不互相影响；</p>
+<p>制约性：因访问共享数据/资源或进程间同步而产生制约</p>
+<p>程序 = 算法 + 数据结构</p>
+<p>描述进程的数据结构：<strong>进程控制块（Process Control Block，PCB）</strong></p>
+<p>操作系统为每个进程都维护了一个PCB，用来保存与该进程有关的各种状态信息</p>
+<h4 id="进程控制结构"><a href="#进程控制结构" class="headerlink" title="进程控制结构"></a>进程控制结构</h4><p>进程控制块：操作系统管理控制进程运行所用的信息集合。操作系统用PCB来描述进程的基本情况以及运行变化的过程，PCB是进程存在的唯一标志。</p>
+<h4 id="使用进程控制块"><a href="#使用进程控制块" class="headerlink" title="使用进程控制块"></a>使用进程控制块</h4><p>进程的创建：为该进程生成一个PCB<br>进程的终止：回收它的PCB<br>进程的组织管理：通过对PCB的组织管理来实现</p>
+<h4 id="PCB包含一下三大类信息："><a href="#PCB包含一下三大类信息：" class="headerlink" title="PCB包含一下三大类信息："></a>PCB包含一下三大类信息：</h4><p>（一）<strong>进程标识信息</strong>。 如本进程的标识，本进程的产生者标志（父进程标识）；用户标识。<br>（二）<strong>处理机状态信息保存区</strong>。保存进程的运行现场信息：<br><strong>用户可见寄存器</strong>，用户程序可以使用的数据，地址等寄存器。<br><strong>控制和状态寄存器</strong>，如程序计数器（PC），程序状态字（PSW）。<br><strong>栈指针</strong>，过程调用/系统调用/中断处理和返回时需要用到它们。</p>
+<p>（三）进程控制信息：<br><strong>调度和状态信息</strong>，用于操作系统调度进程并占用处理机使用。<br><strong>进程间通信</strong>，为支持进程间的与通信相关的各种标识，信号，信件等，这些信息存在接收方的进程控制块中。<br><strong>存储管理信息</strong>，包含有指向本进程映像存储空间的数据结构。<br><strong>进程所用资源</strong>，说明由进程打开、使用的系统资源，如打开的文件等。<br><strong>有关数据结构连接信息</strong>，进程可以连接到一个进程队列中，或连接到相关的其他进程的PCB。</p>
+<h4 id="PCB的组织方式"><a href="#PCB的组织方式" class="headerlink" title="PCB的组织方式"></a>PCB的组织方式</h4><p>链表：同一状态的进程其PCB成一个链表，多个状态对应多个不同的链表（各状态的进程形成不同的链表：就绪链表、阻塞链表）</p>
+<p>索引表：同一状态的进程归入一个index表（由index指向PCB），多个状态对应对个不同的index表（各状态的进程形成不同的索引表：就绪索引表、阻塞索引表）</p>
+<p><img src="./p1.png" alt="p1"></p>
+<h4 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h4><p>进程的生命期管理<br>进程状态变化模型<br>进程挂起模型</p>
+<h4 id="进程的生命期管理"><a href="#进程的生命期管理" class="headerlink" title="进程的生命期管理"></a>进程的生命期管理</h4><p>进程创建<br>进程运行<br>进程等待<br>进程唤醒<br>进程结束</p>
+<h4 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h4><p>引起进程创建的3个主要事件：</p>
+<ul>
+<li>系统初始化时</li>
+<li>用户请求创建一个新进程</li>
+<li>正在运行的进程执行了创建进程的系统调用</li>
+</ul>
+<h4 id="进程运行"><a href="#进程运行" class="headerlink" title="进程运行"></a>进程运行</h4><p>内核选择一个就绪的进程，让它占用处理机并执行</p>
+<ul>
+<li>为何选择？</li>
+<li>如何选择？</li>
+</ul>
+<h4 id="进程等待"><a href="#进程等待" class="headerlink" title="进程等待"></a>进程等待</h4><p>在以下情况下，进程等待（阻塞）：</p>
+<ol>
+<li>请求并等待系统服务，无法马上完成</li>
+<li>启动某种操作，无法马上完成</li>
+<li>需要的数据没有到达</li>
+</ol>
+<p>进程只能自己阻塞自己，因为只有进程自身才能知道何时需要等待某种事件的发生</p>
+<h4 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h4><p>唤醒进程的原因：</p>
+<ol>
+<li>被阻塞进程需要的资源可被满足</li>
+<li>被阻塞进程等待的事件到达</li>
+<li>将该进程的PCB插入到就绪队列</li>
+</ol>
+<p><strong>进程只能被别的进程或操作系统唤醒。</strong></p>
+<h4 id="进程结束"><a href="#进程结束" class="headerlink" title="进程结束"></a>进程结束</h4><p>在以下4种情形下，进程结束：</p>
+<ul>
+<li>正常退出（自愿的）</li>
+<li>错误退出（自愿的）</li>
+<li>致命错误（强制性的）</li>
+<li>被其他进程所杀（强制性的）</li>
+</ul>
+<p><img src="./p2.png" alt="p2"></p>
+<h4 id="进程状态变化模型"><a href="#进程状态变化模型" class="headerlink" title="进程状态变化模型"></a>进程状态变化模型</h4><p>进程的三种基本状态：<br>进程在生命结束前处于且仅处于三种基本状态之一，不同系统设置的进程状态数目不同</p>
+<p>运行状态（Running）：当一个程序正在处理机上运行时</p>
+<p>就绪状态（Ready）：一个进程获得了除处理机之外的一切所需资源，一旦得到处理机即可运行</p>
+<p>等待状态（又称阻塞状态Blocked）：一个进程正在等待某个事件而暂停运行时。如等待某资源，等待输入/输出完成。</p>
+<p><img src="./p3.png" alt="p3"></p>
+<p>进程的其他基本状态：<br>创建状态（New）：一个进程正在被创建，还没被转到就绪状态之前的状态</p>
+<p>结束状态（Exit）：一个进程正在从系统中消失时的状态，这是因为进程结束或由于其他原因所导致的</p>
+<p><img src="./p4.png" alt="p4"></p>
+<h4 id="进程挂起"><a href="#进程挂起" class="headerlink" title="进程挂起"></a>进程挂起</h4><p>Why？合理且充分地利用系统资源。</p>
+<p>进程在挂起状态时，意味着进程没有占用内存空间。处于挂起状态的进程映像在磁盘上。</p>
+<p><img src="./p5.png" alt="p5"></p>
+<h4 id="挂起状态"><a href="#挂起状态" class="headerlink" title="挂起状态"></a>挂起状态</h4><p><strong>阻塞挂起状态</strong>：进程在外存并等待某事件的出现；<br><strong>就绪挂起状态</strong>：进程在外存，但只要进入内存，即可运行；</p>
+<h4 id="与挂起相关的状态转换"><a href="#与挂起相关的状态转换" class="headerlink" title="与挂起相关的状态转换"></a>与挂起相关的状态转换</h4><p>挂起（Suspend）：把一个进程从内存存到外存；可能有以下几种情况：<br><strong>阻塞到阻塞挂起</strong>：没有进程处于就绪状态或就绪进程要求更多内存资源时，会进行这种转换，以提交新进程或运行就绪进程</p>
+<p><strong>就绪到就绪挂起</strong>：当有高优先级阻塞（系统认为会很快就绪的）进程和低优先就绪进程时，系统会选择挂起低优先级就绪进程</p>
+<p><strong>运行到就绪挂起</strong>：对抢先式分时系统，当有高优先级阻塞挂起进程因事件出现而进入就绪挂起时，系统可能会把运行进程转到就绪挂起状态</p>
+<p>在外存时的状态转换：<br><strong>阻塞挂起到就绪挂起</strong>：当有阻塞挂起进程因相关事件出现时，系统会把阻塞挂起进程转换为就绪挂起进程。</p>
+<p>解挂/激活（Activate）：把一个进程从外存转入到内存；可能有以下几种情况：<br><strong>就绪挂起到就绪</strong>：没有就绪进程或挂起就绪进程优先级高于就绪进程时，会进行这种转换</p>
+<p><strong>阻塞挂起到阻塞</strong>：当一个进程释放足够内存时，系统会把一个高优先级阻塞挂起（系统认为会很快出现所等待的事件）进程转换为阻塞进程；</p>
+<p>从进程的观点来看OS：用户进程、磁盘管理进程、中断进程……</p>
+<p><img src="./p6.png" alt="p6"></p>
+<p><strong>状态队列</strong></p>
+<ul>
+<li><p>由操作系统来维护一组队列，用来表示系统当中所有进程的当前状态；</p>
+</li>
+<li><p>不同的状态分别用不同的队列表示（就绪队列、各种类型的阻塞队列）；</p>
+</li>
+<li><p>每个进程的PCB都根据它的状态加入到相应的队列当中，当一个进程的状态发生变化时，它的PCB从一个状态队列中脱离出来，加入到另外一个队列中。</p>
+</li>
+</ul>
+<p><img src="./p7.png" alt="p7"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/30/操作系统-学习笔记-抖动问题/" rel="next" title="操作系统-学习笔记-抖动问题">
+                <i class="fa fa-chevron-left"></i> 操作系统-学习笔记-抖动问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/31/操作系统-学习笔记-线程/" rel="prev" title="操作系统-学习笔记-线程">
+                操作系统-学习笔记-线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="枳ukiyoe" />
+            
+              <p class="site-author-name" itemprop="name">枳ukiyoe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程管理"><span class="nav-number">1.</span> <span class="nav-text">进程管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的组成："><span class="nav-number">2.</span> <span class="nav-text">进程的组成：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和程序的联系"><span class="nav-number">3.</span> <span class="nav-text">进程和程序的联系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">4.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的特点"><span class="nav-number">5.</span> <span class="nav-text">进程的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程控制结构"><span class="nav-number">6.</span> <span class="nav-text">进程控制结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用进程控制块"><span class="nav-number">7.</span> <span class="nav-text">使用进程控制块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PCB包含一下三大类信息："><span class="nav-number">8.</span> <span class="nav-text">PCB包含一下三大类信息：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PCB的组织方式"><span class="nav-number">9.</span> <span class="nav-text">PCB的组织方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程状态"><span class="nav-number">10.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的生命期管理"><span class="nav-number">11.</span> <span class="nav-text">进程的生命期管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程创建"><span class="nav-number">12.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程运行"><span class="nav-number">13.</span> <span class="nav-text">进程运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程等待"><span class="nav-number">14.</span> <span class="nav-text">进程等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程唤醒"><span class="nav-number">15.</span> <span class="nav-text">进程唤醒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程结束"><span class="nav-number">16.</span> <span class="nav-text">进程结束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程状态变化模型"><span class="nav-number">17.</span> <span class="nav-text">进程状态变化模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程挂起"><span class="nav-number">18.</span> <span class="nav-text">进程挂起</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂起状态"><span class="nav-number">19.</span> <span class="nav-text">挂起状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与挂起相关的状态转换"><span class="nav-number">20.</span> <span class="nav-text">与挂起相关的状态转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">枳ukiyoe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

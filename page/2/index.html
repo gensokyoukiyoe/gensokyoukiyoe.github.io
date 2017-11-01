@@ -258,6 +258,450 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/25/操作系统-学习笔记-最近最久未使用算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/操作系统-学习笔记-最近最久未使用算法/" itemprop="url">操作系统-学习笔记-最近最久未使用算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T15:10:30+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="最近最久未使用算法"><a href="#最近最久未使用算法" class="headerlink" title="最近最久未使用算法"></a>最近最久未使用算法</h4><p>基本思路:当一个缺页中断发生时，选择最久未使用的那个页面，并淘汰之。</p>
+<p>它是对最优页面置换算法的一个近似，其依据是程序的局部性原理，即在最近一小段时间（或几条指令内），如果某些页面被频繁地访问，那么在将来一小段时间内，它们还可能被再一次频繁访问。反过来说，如果过去某些页面长时间未访问，那么在将来它们还可能会长时间地得不到访问。</p>
+<p><img src="./1.png" alt="p1"></p>
+<h4 id="LRU-算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是："><a href="#LRU-算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是：" class="headerlink" title="LRU 算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是："></a>LRU 算法需要记录各个页面使用时间的先后顺序，开销比较大。两种可能的实现方式是：</h4><ol>
+<li><p>系统维护一个页面链表，最近刚刚使用过的页面作为首节点，最久未使用的页面最为尾节点。每次访问内存时，找到相应的页面，把它从链表中摘下来，再移动到链表之首。每次缺页中断发生时，淘汰链表末尾的页面。</p>
+</li>
+<li><p>设置一个活动页面栈，当访问某页时，将此页号压入栈顶，然后，考察栈内是否有与此页面相同的页号，若有则抽出。当需要淘汰一个页面时，总是选择栈底的页面，它就是最久未使用的。</p>
+</li>
+</ol>
+<p><img src="./2.png" alt="p2"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/25/操作系统-学习笔记-先进先出算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/操作系统-学习笔记-先进先出算法/" itemprop="url">操作系统-学习笔记-先进先出算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T11:31:44+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="先进先出算法-First-in-First-out-FIFO"><a href="#先进先出算法-First-in-First-out-FIFO" class="headerlink" title="先进先出算法(First-in First-out, FIFO)"></a>先进先出算法(First-in First-out, FIFO)</h4><p>基本思路：选择在内存中驻留时间最长的页面并淘汰之。具体来讲，系统维护着一个链表，记录了所有位于内存中的逻辑页面。从链表的排列顺序来看，链首页面的驻留时间最长，链尾驻留时间最短。当发生一个缺页中断时，把链首页面淘汰出局，并把新的页面添加到链表末尾。</p>
+<p>性能较差，调出的页面有可能是经常要访问的页面，并且有Belayd现象。FIFO很少单独使用。</p>
+<p>例子:<br><img src="./1.png" alt="p1"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/24/操作系统-学习笔记-最优页面置换算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/24/操作系统-学习笔记-最优页面置换算法/" itemprop="url">操作系统-学习笔记-最优页面置换算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T22:37:44+08:00">
+                2017-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h4><p>功能与目标<br>功能：当缺页中断发生，需要调入新的页面而内存已满时，选择内存当中哪个物理页面被置换。</p>
+<p>目标:尽可能地减少页面换进换出次数（即缺页中断的次数）具体来说，把未来不再使用的或短期内较少使用的页面换出，通常只能在局部性原理指导下依据过去的统计数据来预测;</p>
+<p>页面锁定(frame locking)：用于描述必须常驻内存的操作系统的关键部分或时间关键(time-critical)的应用程序。实现方法是：在页表中添加锁定标志位(lock-bit)。</p>
+<p><img src="./1.png" alt="p1"></p>
+<h4 id="最优页面置换算法-OPT-optimal"><a href="#最优页面置换算法-OPT-optimal" class="headerlink" title="最优页面置换算法(OPT,optimal)"></a>最优页面置换算法(OPT,optimal)</h4><p>基本思路：当一个缺页中断发生时，对保存在内存中的每个逻辑页面，计算在它的下一次访问之前，还需要等待多长时间，从中选择等待时间最长的那个,作为被置换的页面。</p>
+<p>这只是一种理想情况，在实际系统中是无法实现的，因为操作系统无从知道每个页面要等待多长时间以后才会被再次访问。</p>
+<p>可以作为其他算法的性能评价标准的依据(在一个模拟器上运行某个程序，并记录每一次的页面访问情况，在第二遍运行时即可使用最优算法)。</p>
+<p><img src="./2.png" alt="p2"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/23/操作系统-学习笔记-虚拟内存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1521,439 +1965,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/操作系统-学习笔记-计算机体系结构及内存分层体系/" itemprop="url">操作系统-学习笔记-计算机体系结构及内存分层体系</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T13:04:33+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>计算机体系结构/内存分层结构</p>
-<p>地址空间 &amp; 地址生成</p>
-<p>连续地址分配</p>
-<h4 id="计算机体系结构-内存分层结构"><a href="#计算机体系结构-内存分层结构" class="headerlink" title="计算机体系结构/内存分层结构"></a>计算机体系结构/内存分层结构</h4><p>计算机体系结构<br>内存分层结构<br>在操作系统的内存管理范例</p>
-<h4 id="CPU处理速度"><a href="#CPU处理速度" class="headerlink" title="CPU处理速度"></a>CPU处理速度</h4><p>寄存器&gt; L1缓存&gt; L2缓存 &gt; 主存 &gt; 磁盘(虚拟内存)</p>
-<blockquote><p>内存 Memory 由二部分组成<br>第一部分：Random-access memory (RAM) ，随机存取存储器，对于CPU来说，RAM是主要存放数据和程序的地方，所以也叫做“主存”，也就是我们平常说的，内存条，一旦断电数据就丢失了;</p><br><p>第二部分：Read-Only Memory（ROM），只读存储器，对于用户来说，它只能读取数据，不能写入信息，断电也没有关系，放ROM的数据一辈子都不会变，旧式电脑的BIOS放在ROM上</p><br><p><img src="https://pic3.zhimg.com/50/57accc32a92e037d96e9aa9211f9438a_hd.png" alt="存储器结构图"></p><footer><strong>DADAman</strong><cite><a href="https://www.zhihu.com/question/28445273" target="_blank" rel="external">电脑的主存储器和主存、内存的关系是什么？</a></cite></footer></blockquote>
-<h4 id="操作系统要完成的目标："><a href="#操作系统要完成的目标：" class="headerlink" title="操作系统要完成的目标："></a>操作系统要完成的目标：</h4><p>抽象：逻辑地址空间<br>保护：独立地址空间<br>共享：访问相同内存<br>虚拟化：更多的地址空间</p>
-<h4 id="操作系统管理内存的不同方法："><a href="#操作系统管理内存的不同方法：" class="headerlink" title="操作系统管理内存的不同方法："></a>操作系统管理内存的不同方法：</h4><p>程序重定位<br>分段<br>分页<br>虚拟内存<br>按需分页虚拟内存</p>
-<h4 id="实现高度依赖硬件"><a href="#实现高度依赖硬件" class="headerlink" title="实现高度依赖硬件"></a>实现高度依赖硬件</h4><p>必须知道内存架构<br>MMU(内存管理单元)：硬件组件负责处理CPU的内存访问请求</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/18/操作系统-学习笔记-启动/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/18/操作系统-学习笔记-启动/" itemprop="url">操作系统-学习笔记-启动</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T22:10:40+08:00">
-                2017-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="BIOS："><a href="#BIOS：" class="headerlink" title="BIOS："></a>BIOS：</h4><p>将Bootloader从磁盘引导扇区(512bytes)加载到0x7c00<br>跳转到CS：IP=0000：7c00</p>
-<h4 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h4><p>将操作系统代码和数据从硬盘加载到内存中</p>
-<p>系统调用：应用程序主动向操作系统发出</p>
-<p>异常(来源于不良的应用程序)：非法指令或其他坏的处理状态(内存出错)</p>
-<p>中断(来源于设备)：来自不同的硬件设备的计时器和网络中断</p>
-<p>处理时间：<br>中断：异步<br>异常：同步<br>系统调用： 同步或异步</p>
-<p>响应时间：<br>中断：持续，对用户应用程序是透明的<br>异常：杀死或重新执行意想不到的应用程序指令<br>系统调用：等待和持续</p>
-<h4 id="中断-中断表"><a href="#中断-中断表" class="headerlink" title="中断  中断表"></a>中断  中断表</h4><h5 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h5><p>设置中断标记[cpu初始化]</p>
-<ol>
-<li>将内部、外部事件设置中断标记</li>
-<li>中断事件的id</li>
-</ol>
-<h5 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h5><ol>
-<li>保存当前处理的状态</li>
-<li>中断服务程序处理</li>
-<li>清楚中断标记</li>
-<li>恢复之前保存的处理状态</li>
-</ol>
-<h4 id="异常：异常编号"><a href="#异常：异常编号" class="headerlink" title="异常：异常编号"></a>异常：异常编号</h4><h5 id="保存现场"><a href="#保存现场" class="headerlink" title="保存现场"></a>保存现场</h5><h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><ol>
-<li>杀死产生了异常的程序</li>
-<li>重新执行异常指令<h5 id="恢复现场-也是透明的，用户感知不到"><a href="#恢复现场-也是透明的，用户感知不到" class="headerlink" title="恢复现场(也是透明的，用户感知不到)"></a>恢复现场(也是透明的，用户感知不到)</h5></li>
-</ol>
-<h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><p>系统调用接口<br>例： 应用程序调用printf() ，会 调用系统调用write()</p>
-<p>接口而不是直接进行系统调用</p>
-<p>win32 api：windows<br>posix api：posix-base systems，包括unix，linux，mac<br>java api：jvm</p>
-<p>操作系统 用户态，内核态</p>
-<h4 id="跨越操作系统边界的开销"><a href="#跨越操作系统边界的开销" class="headerlink" title="跨越操作系统边界的开销"></a>跨越操作系统边界的开销</h4><ul>
-<li>在执行时间上的开销超过程序调用</li>
-<li>开销：<br>建立中断/异常/系统调用号与对应服务例程映射关系的初始化开销<br>建立内核堆栈<br>验证参数<br>内核态映射到用户态的地址空间，更新页面映射权限<br>内核态独立地址空间  TLB</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/10/18/hexo如何添加音乐-视频/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枳ukiyoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枳ukiyoe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/18/hexo如何添加音乐-视频/" itemprop="url">hexo如何添加音乐/视频</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T10:21:23+08:00">
-                2017-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="markdown兼容html，采用html标签添加"><a href="#markdown兼容html，采用html标签添加" class="headerlink" title="markdown兼容html，采用html标签添加"></a>markdown兼容html，采用html标签添加</h4><h5 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=400 height=500 src=&quot;/video/tt.mp4&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
-<p>效果如下:</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="400" height="500" src="/video/tt.mp4"></iframe>
-
-<h5 id="播放音乐"><a href="#播放音乐" class="headerlink" title="播放音乐"></a>播放音乐</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=462342208&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=462342208&auto=1&height=66"></iframe>
-
-
-<h4 id="通过hexo插件播放"><a href="#通过hexo插件播放" class="headerlink" title="通过hexo插件播放"></a>通过hexo插件播放</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% aplayer &quot;Caffeine&quot; &quot;Jeff Williams&quot; &quot;http://7xq131.com1.z0.glb.clouddn.com/Preparation.mp3&quot; &quot;autoplay&quot; %&#125;</div><div class="line"></div><div class="line">&#123;% dplayer &quot;url=http://devtest.qiniudn.com/若能绽放光芒.mp4&quot; &quot;api=http://dplayer.daoapp.io&quot; &quot;pic=http://devtest.qiniudn.com/若能绽放光芒.png&quot; &quot;id=9E2E3368B56CDBB4&quot; &quot;loop=yes&quot; &quot;theme=#FADFA3&quot; &quot;autoplay=false&quot; &quot;token=tokendemo&quot; %&#125;</div></pre></td></tr></table></figure>
-<p>不想搞了，这个总有错，给个链接，想弄的去看 <a href="http://www.jianshu.com/p/53e0d2a617da" target="_blank" rel="external">传送门</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2003,7 +2019,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
