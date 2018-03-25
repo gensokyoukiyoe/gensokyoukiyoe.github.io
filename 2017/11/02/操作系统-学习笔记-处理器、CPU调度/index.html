@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景CPU 调度CPU 调度时间
+上下文切换切换CPU的当前任务，从一个进程/线程到另一个保存当前进程/线程在PCB/TCB中的执行上下文（CPU状态）读取下一个进程/线程的上下文
+CPU调度从就绪队列中挑选一个进程/线程作为CPU将要运行的下一个进程/线程调度程序：挑选进程/线程的内核函数（通过一些调度策略）什么时候进行调度？
+
+内核运行调度程序的条件（满足一条即可）
+
+一个进程从运行状态切换到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-学习笔记-处理器、CPU调度">
+<meta property="og:url" content="gensokyoukiyoe.github.io/2017/11/02/操作系统-学习笔记-处理器、CPU调度/index.html">
+<meta property="og:site_name" content="枳ukiyoe's blog">
+<meta property="og:description" content="背景CPU 调度CPU 调度时间
+上下文切换切换CPU的当前任务，从一个进程/线程到另一个保存当前进程/线程在PCB/TCB中的执行上下文（CPU状态）读取下一个进程/线程的上下文
+CPU调度从就绪队列中挑选一个进程/线程作为CPU将要运行的下一个进程/线程调度程序：挑选进程/线程的内核函数（通过一些调度策略）什么时候进行调度？
+
+内核运行调度程序的条件（满足一条即可）
+
+一个进程从运行状态切换到">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p1.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p2.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p3.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p4.png">
+<meta property="og:image" content="gensokyoukiyoe.github.io/./p5.png">
+<meta property="og:updated_time" content="2017-11-07T01:55:13.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统-学习笔记-处理器、CPU调度">
+<meta name="twitter:description" content="背景CPU 调度CPU 调度时间
+上下文切换切换CPU的当前任务，从一个进程/线程到另一个保存当前进程/线程在PCB/TCB中的执行上下文（CPU状态）读取下一个进程/线程的上下文
+CPU调度从就绪队列中挑选一个进程/线程作为CPU将要运行的下一个进程/线程调度程序：挑选进程/线程的内核函数（通过一些调度策略）什么时候进行调度？
+
+内核运行调度程序的条件（满足一条即可）
+
+一个进程从运行状态切换到">
+<meta name="twitter:image" content="gensokyoukiyoe.github.io/./p1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="gensokyoukiyoe.github.io/2017/11/02/操作系统-学习笔记-处理器、CPU调度/"/>
+
+
+
+
+
+  <title>操作系统-学习笔记-处理器、CPU调度 | 枳ukiyoe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">枳ukiyoe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="gensokyoukiyoe.github.io/2017/11/02/操作系统-学习笔记-处理器、CPU调度/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枳ukiyoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枳ukiyoe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统-学习笔记-处理器、CPU调度</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T10:19:25+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>CPU 调度<br>CPU 调度时间</p>
+<p>上下文切换<br>切换CPU的当前任务，从一个进程/线程到另一个<br>保存当前进程/线程在PCB/TCB中的执行上下文（CPU状态）<br>读取下一个进程/线程的上下文</p>
+<p>CPU调度<br>从就绪队列中挑选一个进程/线程作为CPU将要运行的下一个进程/线程<br>调度程序：挑选进程/线程的内核函数（通过一些调度策略）<br>什么时候进行调度？</p>
+<p><img src="./p1.png" alt="p1"></p>
+<p>内核运行调度程序的条件（满足一条即可）</p>
+<ul>
+<li>一个进程从运行状态切换到等待状态</li>
+<li>一个进程被终结</li>
+</ul>
+<p>不可抢占</p>
+<ul>
+<li>调度程序必须等待事件结束</li>
+</ul>
+<p>可以抢占</p>
+<ul>
+<li>调度程序在中断被相应后执行</li>
+<li>当前的进程从运行切换到就绪，或者一个进程从等待切换到就绪</li>
+<li>当前运行的程序可以被换出</li>
+</ul>
+<h4 id="调度原则"><a href="#调度原则" class="headerlink" title="调度原则"></a>调度原则</h4><p><img src="./p2.png" alt="p2"></p>
+<h4 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h4><p>CPU使用率</p>
+<ul>
+<li>CPU处于忙状态所的时间比</li>
+</ul>
+<p>吞吐量</p>
+<ul>
+<li>在单位时间内完成的进程数</li>
+</ul>
+<p>周转时间</p>
+<ul>
+<li>一个进程从初始化到结束，包括所有等待时间所花费的时间</li>
+</ul>
+<p>等待时间</p>
+<ul>
+<li>进程在就绪队列中的总时间比</li>
+</ul>
+<p>响应时间</p>
+<ul>
+<li>从一个请求被提交到产生第一次相应所花费的总时间</li>
+</ul>
+<p>人们通常需要“更快”的服务</p>
+<p>什么是“更快”</p>
+<ul>
+<li>传输文件时的高宽带</li>
+<li>玩游戏时的低延迟</li>
+<li>这两个因素是独立的</li>
+</ul>
+<p>和水管类比<br>低延迟：喝水的时候想要一打开水龙头水就流出来<br>高宽带：给游泳池注水时希望水龙头里同时流出大量的水，并且不介意是否存在延迟</p>
+<p>希望调度算法达到的效果<br>减少相应时间</p>
+<ul>
+<li>及时处理用户的输入并且尽快将输出提供给用户</li>
+</ul>
+<p>减少平均响应时间的波动</p>
+<ul>
+<li>在交互系统中，可预测性比高差异低平均更重要</li>
+</ul>
+<p>增加吞吐量 <strong>两个方面</strong></p>
+<ul>
+<li>减少开销（操作系统开销，上下文切换）</li>
+<li>系统资源的高效利用（CPU，I/O设备）</li>
+</ul>
+<p>减少等待时间</p>
+<ul>
+<li>减少每个进程的等待时间</li>
+</ul>
+<p>低延迟调度增加了交互式表现</p>
+<ul>
+<li>如果移动了鼠标，但是屏幕中的光标却没动，我可能会重启电脑</li>
+</ul>
+<p>但是操作系统需要保证吞吐量不受影响</p>
+<ul>
+<li>我想结束长时间的编程，所以操作系统必须不时进行调度，即使存在许多交互任务</li>
+</ul>
+<p>吞吐量是操作系统的计算带宽<br>响应时间是操作系统的计算延迟</p>
+<h4 id="公平的定义"><a href="#公平的定义" class="headerlink" title="公平的定义"></a>公平的定义</h4><p>举例</p>
+<ul>
+<li>保证每个进程占用相同的CPU时间</li>
+<li>这公平吗？如果一个用户比其他用户运行更多的进程怎么办</li>
+</ul>
+<p>举例</p>
+<ul>
+<li>保证每个进程都等待相同的时间</li>
+</ul>
+<p><strong>公平通常会增加平均响应时间</strong></p>
+<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><h4 id="FCFS（先来先服务）"><a href="#FCFS（先来先服务）" class="headerlink" title="FCFS（先来先服务）"></a>FCFS（先来先服务）</h4><p>First come，First served</p>
+<p><img src="./p3.png" alt="p3"></p>
+<p>优点</p>
+<ul>
+<li>简单</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>平均等待时间波动较大</li>
+<li>花费时间少的任务可能排在花费时间长的任务后面</li>
+<li>可能导致I/O和CPU之间的重叠处理 ： CPU密集型进程会导致I/O设备闲置，I/O密集型进程也在等待</li>
+</ul>
+<h4 id="SPN（SJF）-SRT-短进程优先（短作业优先）短剩余时间优先"><a href="#SPN（SJF）-SRT-短进程优先（短作业优先）短剩余时间优先" class="headerlink" title="SPN（SJF） SRT 短进程优先（短作业优先）短剩余时间优先"></a>SPN（SJF） SRT 短进程优先（短作业优先）短剩余时间优先</h4><p>Shortest Process Next（Shortest Job First） Shortest Remaining Time<br><img src="./p4.png" alt="p4"><br><img src="./p5.png" alt="p5"></p>
+<h4 id="HRRN-最高响应比优先"><a href="#HRRN-最高响应比优先" class="headerlink" title="HRRN (最高响应比优先)"></a>HRRN (最高响应比优先)</h4><p>Highest Response Ratio Next</p>
+<h4 id="Round-Robin-轮循"><a href="#Round-Robin-轮循" class="headerlink" title="Round Robin (轮循)"></a>Round Robin (轮循)</h4><ul>
+<li>使用时间切片和抢占来轮流执行任务</li>
+</ul>
+<p>####Multilevel Feedback Queues (多级反馈队列)</p>
+<ul>
+<li>优先队列中的轮循</li>
+</ul>
+<h4 id="Fair-Share-Scheduling-公平共享调度"><a href="#Fair-Share-Scheduling-公平共享调度" class="headerlink" title="Fair Share Scheduling (公平共享调度)"></a>Fair Share Scheduling (公平共享调度)</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/操作系统-学习笔记-线程/" rel="next" title="操作系统-学习笔记-线程">
+                <i class="fa fa-chevron-left"></i> 操作系统-学习笔记-线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/25/计算机组成原理-计算机的基本组成/" rel="prev" title="计算机组成原理-计算机的基本组成">
+                计算机组成原理-计算机的基本组成 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="枳ukiyoe" />
+            
+              <p class="site-author-name" itemprop="name">枳ukiyoe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调度原则"><span class="nav-number">2.</span> <span class="nav-text">调度原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#评价指标"><span class="nav-number">3.</span> <span class="nav-text">评价指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公平的定义"><span class="nav-number">4.</span> <span class="nav-text">公平的定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法"><span class="nav-number"></span> <span class="nav-text">调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FCFS（先来先服务）"><span class="nav-number">1.</span> <span class="nav-text">FCFS（先来先服务）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SPN（SJF）-SRT-短进程优先（短作业优先）短剩余时间优先"><span class="nav-number">2.</span> <span class="nav-text">SPN（SJF） SRT 短进程优先（短作业优先）短剩余时间优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HRRN-最高响应比优先"><span class="nav-number">3.</span> <span class="nav-text">HRRN (最高响应比优先)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Round-Robin-轮循"><span class="nav-number">4.</span> <span class="nav-text">Round Robin (轮循)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fair-Share-Scheduling-公平共享调度"><span class="nav-number">5.</span> <span class="nav-text">Fair Share Scheduling (公平共享调度)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">枳ukiyoe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
